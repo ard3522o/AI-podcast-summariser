@@ -1,0 +1,6 @@
+allowBuilds:
+  '@clerk/shared': false
+  esbuild: false
+  msw: false
+  protobufjs: false
+  sharp: false
