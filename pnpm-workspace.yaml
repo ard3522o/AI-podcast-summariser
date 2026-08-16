@@ -1,6 +1,7 @@
 allowBuilds:
   '@clerk/shared': false
   esbuild: false
+  inngest-cli: false
   msw: false
   protobufjs: false
   sharp: false
