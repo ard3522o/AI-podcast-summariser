@@ -2,6 +2,7 @@ import type { step as InngestStep } from "inngest";
 import { formatTimestamp } from "@/lib/format";
 import type { TranscriptWithExtras } from "@/types/assemblyai";
 import { openai } from "../../lib/openai-client";
+import { extractJsonFromResponse } from "@/lib/json-extract";
 
 type YouTubeTimestamp = {
   timestamp: string;
@@ -111,7 +112,7 @@ Remember: Create TITLES, not transcript excerpts!`;
 
   let aiTitles: { index: number; title: string }[] = [];
   try {
-    const parsed = JSON.parse(content);
+    const parsed = JSON.parse(extractJsonFromResponse(content || "{}"));
     aiTitles = parsed.titles || [];
     console.log(`Successfully parsed ${aiTitles.length} AI-generated titles`);
     if (aiTitles.length > 0) {

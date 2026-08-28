@@ -2,6 +2,7 @@ import type { step as InngestStep } from "inngest";
 import { type SocialPosts, socialPostsSchema } from "@/schemas/ai-outputs";
 import type { TranscriptWithExtras } from "@/types/assemblyai";
 import { openai } from "../../lib/openai-client";
+import { extractJsonFromResponse } from "@/lib/json-extract";
 
 const SOCIAL_SYSTEM_PROMPT =
   "You are a viral social media marketing expert who understands each platform's unique audience, tone, and best practices. You create platform-optimized content that drives engagement and grows audiences. You MUST respond with a valid JSON object containing exactly these keys: 'twitter', 'linkedin', 'instagram', 'tiktok', 'youtube', and 'facebook', where each key maps to a string containing the respective post.";
@@ -84,7 +85,7 @@ export async function generateSocialPosts(
           { role: "system", content: SOCIAL_SYSTEM_PROMPT },
           { role: "user", content: buildSocialPrompt(transcript) },
         ],
-        response_format: { type: "json_object" },
+
       });
     });
 
@@ -92,7 +93,7 @@ export async function generateSocialPosts(
 
     const content = response.choices[0]?.message?.content;
     const socialPosts = content
-      ? socialPostsSchema.parse(JSON.parse(content))
+      ? socialPostsSchema.parse(JSON.parse(extractJsonFromResponse(content || "{}")))
       : {
           twitter: "New podcast episode!",
           linkedin: "Check out our latest podcast.",

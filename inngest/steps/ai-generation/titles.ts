@@ -2,6 +2,7 @@ import type { step as InngestStep } from "inngest";
 import { type Titles, titlesSchema } from "@/schemas/ai-outputs";
 import type { TranscriptWithExtras } from "@/types/assemblyai";
 import { openai } from "../../lib/openai-client";
+import { extractJsonFromResponse } from "@/lib/json-extract";
 
 const TITLES_SYSTEM_PROMPT =
   "You are an expert in SEO, content marketing, and viral content creation. You understand what makes titles clickable while maintaining credibility and search rankings. You MUST respond with a valid JSON object containing exactly these keys: 'youtubeShort' (array of strings), 'youtubeLong' (array of strings), 'podcastTitles' (array of strings), and 'seoKeywords' (array of strings).";
@@ -65,7 +66,7 @@ export async function generateTitles(
           { role: "system", content: TITLES_SYSTEM_PROMPT },
           { role: "user", content: buildTitlesPrompt(transcript) },
         ],
-        response_format: { type: "json_object" },
+
       });
     });
 
@@ -73,7 +74,7 @@ export async function generateTitles(
 
     const titlesContent = response.choices[0]?.message?.content;
     const titles = titlesContent
-      ? titlesSchema.parse(JSON.parse(titlesContent))
+      ? titlesSchema.parse(JSON.parse(extractJsonFromResponse(titlesContent || "{}")))
       : {
           youtubeShort: ["Podcast Episode"],
           youtubeLong: ["Podcast Episode - Full Discussion"],

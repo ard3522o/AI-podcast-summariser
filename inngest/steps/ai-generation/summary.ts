@@ -2,6 +2,7 @@ import type { step as InngestStep } from "inngest";
 import { type Summary, summarySchema } from "@/schemas/ai-outputs";
 import type { TranscriptWithExtras } from "@/types/assemblyai";
 import { openai } from "../../lib/openai-client";
+import { extractJsonFromResponse } from "@/lib/json-extract";
 
 const SUMMARY_SYSTEM_PROMPT =
   "You are an expert podcast content analyst and marketing strategist. Your summaries are engaging, insightful, and highlight the most valuable takeaways for listeners.You MUST respond with a valid JSON object containing exactly these keys: 'full' (string), 'bullets' (array of strings), 'insights' (array of strings), and 'tldr' (string)";
@@ -63,7 +64,7 @@ export async function generateSummary(
           { role: "system", content: SUMMARY_SYSTEM_PROMPT },
           { role: "user", content: buildSummaryPrompt(transcript) },
         ],
-        response_format: { type: "json_object" },
+
       });
     });
 
@@ -71,7 +72,7 @@ export async function generateSummary(
 
     const content = response.choices[0]?.message?.content;
     const summary = content
-      ? summarySchema.parse(JSON.parse(content))
+      ? summarySchema.parse(JSON.parse(extractJsonFromResponse(content || "{}")))
       : {
           full: transcript.text.substring(0, 500),
           bullets: ["Full transcript available"],

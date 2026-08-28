@@ -2,6 +2,7 @@ import type { step as InngestStep } from "inngest";
 import { type Hashtags, hashtagsSchema } from "@/schemas/ai-outputs";
 import type { TranscriptWithExtras } from "@/types/assemblyai";
 import { openai } from "../../lib/openai-client";
+import { extractJsonFromResponse } from "@/lib/json-extract";
 
 const HASHTAGS_SYSTEM_PROMPT =
   "You are a social media growth expert who understands platform algorithms and trending hashtag strategies. You create hashtag sets that maximize reach and engagement. You MUST respond with a valid JSON object. The JSON object must contain exactly these keys: 'youtube', 'instagram', 'tiktok', 'linkedin', and 'twitter', where each key contains an array of string hashtags.";
@@ -67,7 +68,7 @@ export async function generateHashtags(
           { role: "system", content: HASHTAGS_SYSTEM_PROMPT },
           { role: "user", content: buildHashtagsPrompt(transcript) },
         ],
-        response_format: { type: "json_object" },
+
       });
     });
 
@@ -75,7 +76,7 @@ export async function generateHashtags(
 
     const content = response.choices[0]?.message?.content;
     const hashtags = content
-      ? hashtagsSchema.parse(JSON.parse(content))
+      ? hashtagsSchema.parse(JSON.parse(extractJsonFromResponse(content || "{}")))
       : {
           youtube: ["#Podcast"],
           instagram: ["#Podcast", "#Content"],

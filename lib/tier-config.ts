@@ -8,7 +8,7 @@ export interface PlanLimits {
 
 export const PLAN_LIMITS: Record<PlanName, PlanLimits> = {
   free: {
-    maxProjects: 3, // lifetime, including deleted
+    maxProjects: 10, // lifetime, including deleted
     maxFileSize: 10 * 1024 * 1024, // 10MB
     maxDuration: 600, // 10 minutes
   },
