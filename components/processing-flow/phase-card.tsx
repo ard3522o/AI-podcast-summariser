@@ -52,7 +52,7 @@ export function PhaseCard({
               <Icon
                 className={cn(
                   "h-8 w-8",
-                  isActive || isCompleted ? "text-white" : "text-emerald-600",
+                  isActive || isCompleted ? "text-white" : "text-emerald-400",
                 )}
               />
             </div>
@@ -64,10 +64,10 @@ export function PhaseCard({
 
           <div>
             {isRunning && (
-              <Loader2 className="h-10 w-10 animate-spin text-emerald-600" />
+              <Loader2 className="h-10 w-10 animate-spin text-emerald-400" />
             )}
             {isCompleted && (
-              <CheckCircle2 className="h-10 w-10 text-emerald-600" />
+              <CheckCircle2 className="h-10 w-10 text-emerald-400" />
             )}
           </div>
         </div>
@@ -87,7 +87,7 @@ export function PhaseCard({
                   <span>Estimated: {timeEstimate}</span>
                 </div>
               )}
-              <span className="text-emerald-600 font-bold">
+              <span className="text-emerald-400 font-bold">
                 {Math.round(progress)}%
               </span>
             </div>

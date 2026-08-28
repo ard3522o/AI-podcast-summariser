@@ -15,7 +15,7 @@ export async function HeroSection() {
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-20 animate-float">
             <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full glass-card hover-glow mb-8 animate-shimmer">
-              <Sparkles className="h-5 w-5 text-emerald-600" />
+              <Sparkles className="h-5 w-5 text-emerald-400" />
               <span className="text-sm font-semibold bg-gradient-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent">
                 AI-Powered Podcast Processing
               </span>

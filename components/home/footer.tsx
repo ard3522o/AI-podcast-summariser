@@ -30,7 +30,7 @@ export function Footer() {
                 <li>
                   <Link
                     href="/"
-                    className="text-gray-400 hover:text-emerald-600 transition-colors text-sm"
+                    className="text-gray-400 hover:text-emerald-400 transition-colors text-sm"
                   >
                     Home
                   </Link>
@@ -38,7 +38,7 @@ export function Footer() {
                 <li>
                   <Link
                     href="/dashboard/projects"
-                    className="text-gray-400 hover:text-emerald-600 transition-colors text-sm"
+                    className="text-gray-400 hover:text-emerald-400 transition-colors text-sm"
                   >
                     Projects
                   </Link>
@@ -46,7 +46,7 @@ export function Footer() {
                 <li>
                   <Link
                     href="/dashboard/upload"
-                    className="text-gray-400 hover:text-emerald-600 transition-colors text-sm"
+                    className="text-gray-400 hover:text-emerald-400 transition-colors text-sm"
                   >
                     Upload
                   </Link>
@@ -61,7 +61,7 @@ export function Footer() {
                 <li>
                   <Link
                     href="#"
-                    className="text-gray-400 hover:text-emerald-600 transition-colors text-sm"
+                    className="text-gray-400 hover:text-emerald-400 transition-colors text-sm"
                   >
                     Documentation
                   </Link>
@@ -69,7 +69,7 @@ export function Footer() {
                 <li>
                   <Link
                     href="#"
-                    className="text-gray-400 hover:text-emerald-600 transition-colors text-sm"
+                    className="text-gray-400 hover:text-emerald-400 transition-colors text-sm"
                   >
                     Contact Us
                   </Link>
@@ -77,7 +77,7 @@ export function Footer() {
                 <li>
                   <Link
                     href="#"
-                    className="text-gray-400 hover:text-emerald-600 transition-colors text-sm"
+                    className="text-gray-400 hover:text-emerald-400 transition-colors text-sm"
                   >
                     Privacy Policy
                   </Link>

@@ -113,7 +113,7 @@ export function SocialPostsTab({ socialPosts }: SocialPostsTabProps) {
           </div>
 
           <div className="relative">
-            <div className="rounded-xl bg-white p-4 md:p-5 text-xs md:text-sm border-2 shadow-sm">
+            <div className="rounded-xl bg-gray-900 p-4 md:p-5 text-xs md:text-sm border-2 shadow-sm">
               <p className="whitespace-pre-wrap leading-relaxed text-gray-300 wrap-break-word">
                 {socialPosts[platform.key]}
               </p>

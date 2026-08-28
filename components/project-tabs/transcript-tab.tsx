@@ -103,7 +103,7 @@ export function TranscriptTab({ projectId, transcript }: TranscriptTabProps) {
                 <div className="flex flex-wrap items-center gap-2 mb-2">
                   <Badge
                     variant="outline"
-                    className="text-xs shrink-0 border-emerald-200 text-emerald-700"
+                    className="text-xs shrink-0 border-emerald-200 text-emerald-300"
                   >
                     {new Date(utterance.start * 1000)
                       .toISOString()

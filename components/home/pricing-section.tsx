@@ -19,7 +19,7 @@ export function PricingSection({ compact = false }: PricingSectionProps) {
               Simple, <span className="gradient-emerald-text">Transparent</span>{" "}
               Pricing
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
               Choose the plan that fits your needs. Upgrade, downgrade, or
               cancel anytime.
             </p>
@@ -96,8 +96,8 @@ export function PricingSection({ compact = false }: PricingSectionProps) {
                 fallback={
                   <div className="flex items-center justify-center py-20">
                     <div className="text-center space-y-4 glass-card p-12 rounded-2xl">
-                      <Loader2 className="h-16 w-16 animate-spin text-emerald-600 mx-auto" />
-                      <p className="text-gray-600 text-lg font-medium">
+                      <Loader2 className="h-16 w-16 animate-spin text-emerald-400 mx-auto" />
+                      <p className="text-gray-400 text-lg font-medium">
                         Loading pricing options...
                       </p>
                     </div>

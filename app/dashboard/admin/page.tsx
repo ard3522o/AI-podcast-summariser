@@ -69,7 +69,7 @@ export default function AdminPage() {
         <div className="container mx-auto px-4 py-6">
           <Link
             href="/dashboard/projects"
-            className="inline-flex items-center text-sm font-medium text-gray-500 hover:text-emerald-600 transition-colors"
+            className="inline-flex items-center text-sm font-medium text-gray-400 hover:text-emerald-400 transition-colors"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Dashboard
@@ -89,7 +89,7 @@ export default function AdminPage() {
               <h1 className="text-3xl font-bold gradient-emerald-text">
                 Admin Panel
               </h1>
-              <p className="text-gray-500">Manage users and permissions</p>
+              <p className="text-gray-400">Manage users and permissions</p>
             </div>
           </div>
           <Button
@@ -107,15 +107,15 @@ export default function AdminPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
           <div className="glass-card rounded-2xl p-6">
             <div className="flex items-center gap-3">
-              <Users className="h-5 w-5 text-emerald-600" />
-              <span className="text-gray-500">Total Users</span>
+              <Users className="h-5 w-5 text-emerald-400" />
+              <span className="text-gray-400">Total Users</span>
             </div>
             <p className="text-3xl font-bold mt-2">{users.length}</p>
           </div>
           <div className="glass-card rounded-2xl p-6">
             <div className="flex items-center gap-3">
-              <Shield className="h-5 w-5 text-emerald-600" />
-              <span className="text-gray-500">Admins</span>
+              <Shield className="h-5 w-5 text-emerald-400" />
+              <span className="text-gray-400">Admins</span>
             </div>
             <p className="text-3xl font-bold mt-2">
               {users.filter((u) => u.isAdmin).length}
@@ -123,8 +123,8 @@ export default function AdminPage() {
           </div>
           <div className="glass-card rounded-2xl p-6">
             <div className="flex items-center gap-3">
-              <Crown className="h-5 w-5 text-emerald-600" />
-              <span className="text-gray-500">Regular Users</span>
+              <Crown className="h-5 w-5 text-emerald-400" />
+              <span className="text-gray-400">Regular Users</span>
             </div>
             <p className="text-3xl font-bold mt-2">
               {users.filter((u) => !u.isAdmin).length}
@@ -143,12 +143,12 @@ export default function AdminPage() {
           )}
 
           {loading ? (
-            <div className="p-12 text-center text-gray-500">
+            <div className="p-12 text-center text-gray-400">
               <RefreshCw className="h-6 w-6 animate-spin mx-auto mb-2" />
               Loading users...
             </div>
           ) : users.length === 0 ? (
-            <div className="p-12 text-center text-gray-500">No users found</div>
+            <div className="p-12 text-center text-gray-400">No users found</div>
           ) : (
             <div className="divide-y">
               {users.map((u) => (
@@ -162,7 +162,7 @@ export default function AdminPage() {
                     </div>
                     <div>
                       <p className="font-medium">{u.name || "Unknown"}</p>
-                      <p className="text-sm text-gray-500">{u.email}</p>
+                      <p className="text-sm text-gray-400">{u.email}</p>
                     </div>
                   </div>
 
@@ -173,7 +173,7 @@ export default function AdminPage() {
                         Admin
                       </Badge>
                     )}
-                    <span className="text-xs text-gray-500">
+                    <span className="text-xs text-gray-400">
                       Joined {new Date(u.createdAt).toLocaleDateString()}
                     </span>
                   </div>

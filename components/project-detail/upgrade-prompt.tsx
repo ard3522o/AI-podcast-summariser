@@ -44,15 +44,15 @@ export function UpgradePrompt({
         </h3>
         <p className="text-base md:text-lg text-gray-400 mb-8">
           This feature is available on the{" "}
-          <strong className="text-emerald-600">{planName}</strong> plan
+          <strong className="text-emerald-400">{planName}</strong> plan
         </p>
 
         <div className="bg-gradient-to-br from-emerald-900/30 to-teal-900/20 rounded-2xl p-6 md:p-8 mb-8 text-left">
           <div className="flex items-start gap-3 mb-4">
             {minPlan === "ultra" ? (
-              <Crown className="h-6 w-6 text-emerald-600 mt-0.5 flex-shrink-0" />
+              <Crown className="h-6 w-6 text-emerald-400 mt-0.5 flex-shrink-0" />
             ) : (
-              <Sparkles className="h-6 w-6 text-emerald-600 mt-0.5 flex-shrink-0" />
+              <Sparkles className="h-6 w-6 text-emerald-400 mt-0.5 flex-shrink-0" />
             )}
             <div className="flex-1">
               <p className="font-bold text-base md:text-lg mb-4 text-white">
@@ -61,7 +61,7 @@ export function UpgradePrompt({
               <ul className="space-y-3 text-sm md:text-base text-gray-300">
                 {planFeatures.map((feat, idx) => (
                   <li key={idx} className="flex items-center gap-3">
-                    <span className="text-emerald-600 font-bold text-lg">
+                    <span className="text-emerald-400 font-bold text-lg">
                       ✓
                     </span>
                     <span className="font-medium">

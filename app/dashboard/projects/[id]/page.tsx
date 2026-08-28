@@ -188,10 +188,10 @@ export default function ProjectDetailPage() {
               variant="outline"
               size="lg"
               onClick={handleStartEdit}
-              className="glass-card hover-lift border-2 border-emerald-200 hover:border-emerald-400 px-6 bg-white"
+              className="glass-card hover-lift border-2 border-emerald-800 hover:border-emerald-500 px-6 bg-gray-900"
             >
-              <Edit2 className="h-4 w-4 mr-2 text-emerald-600" />
-              <span className="font-semibold text-emerald-700">Edit</span>
+              <Edit2 className="h-4 w-4 mr-2 text-emerald-400" />
+              <span className="font-semibold text-emerald-400">Edit</span>
             </Button>
           )}
           <Button

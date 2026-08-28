@@ -49,7 +49,7 @@ export function GenerationOutputItem({
                   ? "text-gray-400"
                   : isActive
                     ? "text-white"
-                    : "text-emerald-600",
+                    : "text-emerald-400",
               )}
             />
           </div>
@@ -61,7 +61,7 @@ export function GenerationOutputItem({
                   isLocked
                     ? "text-gray-400"
                     : isActive
-                      ? "text-emerald-700"
+                      ? "text-emerald-300"
                       : "text-gray-400",
                 )}
               >
@@ -72,7 +72,7 @@ export function GenerationOutputItem({
                   className={cn(
                     "h-5 w-5 animate-spin transition-all duration-500",
                     isActive
-                      ? "text-emerald-600 opacity-100"
+                      ? "text-emerald-400 opacity-100"
                       : "text-gray-400 opacity-50",
                   )}
                 />

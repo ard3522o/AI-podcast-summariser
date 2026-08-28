@@ -32,8 +32,8 @@ export function Header() {
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center gap-2 lg:gap-8">
             <Link href="/" className="flex items-center gap-2.5 hover:opacity-90 transition-all duration-300 group">
-              <div className={isDashboard ? "p-2 rounded-xl bg-white/95 group-hover:bg-white group-hover:scale-110 group-hover:shadow-xl transition-all duration-300" : "p-2 rounded-xl gradient-emerald group-hover:scale-110 group-hover:shadow-xl transition-all duration-300"}>
-                <Sparkles className={isDashboard ? "h-5 w-5 text-emerald-600 group-hover:rotate-12 transition-transform duration-300" : "h-5 w-5 text-white group-hover:rotate-12 transition-transform duration-300"} />
+              <div className={isDashboard ? "p-2 rounded-xl bg-white/95 group-hover:bg-gray-900 group-hover:scale-110 group-hover:shadow-xl transition-all duration-300" : "p-2 rounded-xl gradient-emerald group-hover:scale-110 group-hover:shadow-xl transition-all duration-300"}>
+                <Sparkles className={isDashboard ? "h-5 w-5 text-emerald-400 group-hover:rotate-12 transition-transform duration-300" : "h-5 w-5 text-white group-hover:rotate-12 transition-transform duration-300"} />
               </div>
               <span className={isDashboard ? "text-xl font-bold text-white tracking-tight" : "text-xl font-bold gradient-emerald-text tracking-tight"}>Podcasto</span>
             </Link>
@@ -48,7 +48,7 @@ export function Header() {
               <>
                 {isUserAdmin && (
                   <Link href="/dashboard/admin">
-                    <Button className={isDashboard ? "bg-white/95 text-emerald-600 hover:bg-white hover:scale-105 gap-2 shadow-lg font-semibold transition-all duration-300 border border-white/10" : "gradient-emerald text-white hover-glow hover:scale-105 gap-2 shadow-lg transition-all duration-300"}>
+                    <Button className={isDashboard ? "bg-white/95 text-emerald-400 hover:bg-gray-900 hover:scale-105 gap-2 shadow-lg font-semibold transition-all duration-300 border border-white/10" : "gradient-emerald text-white hover-glow hover:scale-105 gap-2 shadow-lg transition-all duration-300"}>
                       <Shield className="h-4 w-4" />
                       <span className="hidden lg:inline">Admin</span>
                     </Button>
@@ -56,7 +56,7 @@ export function Header() {
                 )}
                 <Protect condition={(has) => !has({ plan: "pro" }) && !has({ plan: "ultra" })} fallback={null}>
                   <Link href="/dashboard/upgrade">
-                    <Button className={isDashboard ? "bg-white/95 text-emerald-600 hover:bg-white hover:scale-105 gap-2 shadow-lg font-semibold transition-all duration-300 border border-white/10" : "gradient-emerald text-white hover-glow hover:scale-105 gap-2 shadow-lg transition-all duration-300"}>
+                    <Button className={isDashboard ? "bg-white/95 text-emerald-400 hover:bg-gray-900 hover:scale-105 gap-2 shadow-lg font-semibold transition-all duration-300 border border-white/10" : "gradient-emerald text-white hover-glow hover:scale-105 gap-2 shadow-lg transition-all duration-300"}>
                       <Zap className="h-4 w-4" />
                       <span className="hidden lg:inline">Upgrade to Pro</span>
                       <span className="lg:hidden">Pro</span>
@@ -65,7 +65,7 @@ export function Header() {
                 </Protect>
                 <Protect condition={(has) => has({ plan: "pro" }) && !has({ plan: "ultra" })} fallback={null}>
                   <Link href="/dashboard/upgrade">
-                    <Button className={isDashboard ? "bg-white/95 text-emerald-600 hover:bg-white hover:scale-105 gap-2 shadow-lg font-semibold transition-all duration-300 border border-white/10" : "gradient-emerald text-white hover-glow hover:scale-105 gap-2 shadow-lg transition-all duration-300"}>
+                    <Button className={isDashboard ? "bg-white/95 text-emerald-400 hover:bg-gray-900 hover:scale-105 gap-2 shadow-lg font-semibold transition-all duration-300 border border-white/10" : "gradient-emerald text-white hover-glow hover:scale-105 gap-2 shadow-lg transition-all duration-300"}>
                       <Crown className="h-4 w-4" />
                       <span className="hidden lg:inline">Upgrade to Ultra</span>
                       <span className="lg:hidden">Ultra</span>
@@ -73,7 +73,7 @@ export function Header() {
                   </Link>
                 </Protect>
                 <Protect condition={(has) => has({ plan: "ultra" })} fallback={null}>
-                  <Badge className={isDashboard ? "gap-1.5 hidden md:flex bg-white/95 text-emerald-600 border-0 px-3 py-1.5 shadow-md hover:shadow-lg transition-all duration-300" : "gap-1.5 hidden md:flex gradient-emerald text-white border-0 px-3 py-1.5 shadow-md hover:shadow-lg transition-all duration-300"}>
+                  <Badge className={isDashboard ? "gap-1.5 hidden md:flex bg-white/95 text-emerald-400 border-0 px-3 py-1.5 shadow-md hover:shadow-lg transition-all duration-300" : "gap-1.5 hidden md:flex gradient-emerald text-white border-0 px-3 py-1.5 shadow-md hover:shadow-lg transition-all duration-300"}>
                     <Crown className="h-3.5 w-3.5" />
                     <span className="font-semibold">Ultra</span>
                   </Badge>
@@ -100,7 +100,7 @@ export function Header() {
               </>
             ) : (
               <SignInButton mode="modal">
-                <Button className={isDashboard ? "bg-white/95 text-emerald-600 hover:bg-white hover:scale-105 shadow-lg font-semibold transition-all duration-300" : "gradient-emerald text-white hover-glow hover:scale-105 shadow-lg transition-all duration-300"}>Sign In</Button>
+                <Button className={isDashboard ? "bg-white/95 text-emerald-400 hover:bg-gray-900 hover:scale-105 shadow-lg font-semibold transition-all duration-300" : "gradient-emerald text-white hover-glow hover:scale-105 shadow-lg transition-all duration-300"}>Sign In</Button>
               </SignInButton>
             )}
           </div>

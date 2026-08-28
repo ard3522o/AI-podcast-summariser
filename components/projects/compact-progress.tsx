@@ -70,7 +70,7 @@ export function CompactProgress({
         <Badge className="text-xs font-semibold bg-emerald-900/30 text-emerald-300 border-emerald-800">
           {statusText}
         </Badge>
-        <span className="text-xs font-bold text-emerald-600">
+        <span className="text-xs font-bold text-emerald-400">
           {Math.round(progress)}%
         </span>
       </div>

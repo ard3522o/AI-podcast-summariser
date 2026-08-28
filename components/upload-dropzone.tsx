@@ -66,7 +66,7 @@ export function UploadDropzone({
             {isDragActive ? (
               <Upload className="h-16 w-16 text-white animate-bounce" />
             ) : (
-              <FileAudio className="h-16 w-16 text-emerald-600" />
+              <FileAudio className="h-16 w-16 text-emerald-400" />
             )}
           </div>
 

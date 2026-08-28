@@ -65,7 +65,7 @@ export function YouTubeTimestampsTab({
 
       <div className="space-y-6">
         <div className="glass-card rounded-xl p-4 md:p-5 bg-linear-to-br from-emerald-900/30 to-teal-900/20 border border-emerald-800/50">
-          <pre className="whitespace-pre-wrap font-mono text-xs md:text-sm wrap-break-word text-gray-800">
+          <pre className="whitespace-pre-wrap font-mono text-xs md:text-sm wrap-break-word text-gray-200">
             {formattedTimestamps}
           </pre>
         </div>

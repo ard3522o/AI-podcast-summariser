@@ -33,7 +33,7 @@ export async function CtaSection() {
               <Link href="/dashboard/upload">
                 <Button
                   size="lg"
-                  className="bg-white text-emerald-600 hover:bg-white/90 hover-glow text-lg px-10 py-7 rounded-xl shadow-2xl font-bold"
+                  className="bg-gray-900 text-emerald-400 hover:bg-white/90 hover-glow text-lg px-10 py-7 rounded-xl shadow-2xl font-bold"
                 >
                   <Upload className="mr-2 h-6 w-6" />
                   Upload Your First Podcast
@@ -43,7 +43,7 @@ export async function CtaSection() {
               <SignInButton mode="modal">
                 <Button
                   size="lg"
-                  className="bg-white text-emerald-600 hover:bg-white/90 hover-glow text-lg px-10 py-7 rounded-xl shadow-2xl font-bold"
+                  className="bg-gray-900 text-emerald-400 hover:bg-white/90 hover-glow text-lg px-10 py-7 rounded-xl shadow-2xl font-bold"
                 >
                   Get Started Now
                   <Sparkles className="ml-2 h-6 w-6" />

@@ -53,13 +53,13 @@ export function UploadProgress({
 
           <div>
             {status === "uploading" && (
-              <Loader2 className="h-7 w-7 animate-spin text-emerald-600" />
+              <Loader2 className="h-7 w-7 animate-spin text-emerald-400" />
             )}
             {status === "processing" && (
-              <Loader2 className="h-7 w-7 animate-spin text-emerald-600" />
+              <Loader2 className="h-7 w-7 animate-spin text-emerald-400" />
             )}
             {status === "completed" && (
-              <CheckCircle2 className="h-7 w-7 text-emerald-600" />
+              <CheckCircle2 className="h-7 w-7 text-emerald-400" />
             )}
             {status === "error" && <XCircle className="h-7 w-7 text-red-500" />}
           </div>
@@ -77,14 +77,14 @@ export function UploadProgress({
               <span className="text-gray-300">
                 {status === "uploading" ? "Uploading..." : "Processing..."}
               </span>
-              <span className="text-emerald-600">{Math.round(progress)}%</span>
+              <span className="text-emerald-400">{Math.round(progress)}%</span>
             </div>
           </div>
         )}
 
         {status === "completed" && (
           <div className="p-4 rounded-xl bg-emerald-900/30 border-2 border-emerald-800/50">
-            <p className="text-sm font-semibold text-emerald-700">
+            <p className="text-sm font-semibold text-emerald-300">
               Upload completed! Redirecting to project dashboard...
             </p>
           </div>

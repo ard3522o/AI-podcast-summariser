@@ -9,7 +9,7 @@ export default function UploadPage() {
           <h1 className="text-5xl font-extrabold mb-4">
             Upload Your <span className="gradient-emerald-text">Podcast</span>
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
             Upload your audio file to generate AI-powered insights, summaries,
             and social media content.
           </p>
@@ -30,10 +30,10 @@ export default function UploadPage() {
                   <span className="text-white font-bold text-lg">1</span>
                 </div>
                 <div>
-                  <p className="font-semibold text-gray-900 mb-1">
+                  <p className="font-semibold text-white mb-1">
                     Secure Upload
                   </p>
-                  <p className="text-gray-600">
+                  <p className="text-gray-400">
                     Your file will be securely uploaded to our storage
                   </p>
                 </div>
@@ -43,10 +43,10 @@ export default function UploadPage() {
                   <span className="text-white font-bold text-lg">2</span>
                 </div>
                 <div>
-                  <p className="font-semibold text-gray-900 mb-1">
+                  <p className="font-semibold text-white mb-1">
                     AI Transcription
                   </p>
-                  <p className="text-gray-600">
+                  <p className="text-gray-400">
                     AI will transcribe your podcast and extract key moments
                   </p>
                 </div>
@@ -56,10 +56,10 @@ export default function UploadPage() {
                   <span className="text-white font-bold text-lg">3</span>
                 </div>
                 <div>
-                  <p className="font-semibold text-gray-900 mb-1">
+                  <p className="font-semibold text-white mb-1">
                     Content Generation
                   </p>
-                  <p className="text-gray-600">
+                  <p className="text-gray-400">
                     Generate summaries, social posts, titles, and hashtags
                   </p>
                 </div>
@@ -69,10 +69,10 @@ export default function UploadPage() {
                   <span className="text-white font-bold text-lg">4</span>
                 </div>
                 <div>
-                  <p className="font-semibold text-gray-900 mb-1">
+                  <p className="font-semibold text-white mb-1">
                     View Results
                   </p>
-                  <p className="text-gray-600">
+                  <p className="text-gray-400">
                     Access your results in the project dashboard
                   </p>
                 </div>
