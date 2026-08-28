@@ -1,4 +1,4 @@
-# AI Podcast SaaS
+# Podcasto
 
 ![Next.js](https://img.shields.io/badge/Next.js-16-black)
 ![Convex](https://img.shields.io/badge/Convex-Database-orange)
@@ -7,7 +7,7 @@
 ![AssemblyAI](https://img.shields.io/badge/AssemblyAI-Transcription-green)
 ![GrokAI](https://img.shields.io/badge/Groq-GPT-teal)
 
-## Stop Spending Hours on Extracting Information from Podcasts - Let AI Do It!
+#Stop spending hours extracting information from podcasts — let AI do it!
 
 Upload your podcast once. Get platform-optimized content for 6 social networks automatically.
 
@@ -81,7 +81,7 @@ No manual writing. No copying and pasting between platforms. No guessing what ha
 - **🎤 Key Moments** - AI identifies viral clip opportunities with timestamps
 - **👥 Speaker Diarization** - "Who said what" with speaker labels and confidence scores
 
-### Technical Features (The Smart Stuff)
+### Technical Features
 
 - **⚡ Parallel AI Processing** - 6 AI jobs run simultaneously (60s total vs 300s sequential)
 - **🔄 Real-time Updates** - See progress live with Convex subscriptions (no polling)
@@ -188,7 +188,7 @@ flowchart LR
 
 ```bash
 git clone <your-repo-url>
-cd ai-podcast-saas-inngest-coderabbit-clerk
+cd podcasto
 ```
 
 2. **Install dependencies**
@@ -235,7 +235,7 @@ Create a `.env.local` file in the root directory with the following variables:
 
 ```bash
 # Convex
-CONVEX_DEPLOYMENT=dev:ai-podcast-saas-inngest-coderabbit-clerk
+CONVEX_DEPLOYMENT=dev:podcasto
 NEXT_PUBLIC_CONVEX_URL=https://your-project.convex.cloud
 
 # Clerk

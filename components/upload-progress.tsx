@@ -31,16 +31,20 @@ export function UploadProgress({
 
           {/* File info */}
           <div className="flex-1 min-w-0">
-            <p className="font-bold text-lg truncate text-gray-900">{fileName}</p>
+            <p className="font-bold text-lg truncate text-white">
+              {fileName}
+            </p>
 
-            <div className="flex items-center gap-3 text-sm text-gray-600 mt-2">
+            <div className="flex items-center gap-3 text-sm text-gray-400 mt-2">
               <span className="font-medium">{formatFileSize(fileSize)}</span>
               {fileDuration && (
                 <>
                   <span>•</span>
                   <div className="flex items-center gap-1.5">
                     <Clock className="h-4 w-4" />
-                    <span className="font-medium">{formatDuration(fileDuration)}</span>
+                    <span className="font-medium">
+                      {formatDuration(fileDuration)}
+                    </span>
                   </div>
                 </>
               )}
@@ -57,22 +61,20 @@ export function UploadProgress({
             {status === "completed" && (
               <CheckCircle2 className="h-7 w-7 text-emerald-600" />
             )}
-            {status === "error" && (
-              <XCircle className="h-7 w-7 text-red-500" />
-            )}
+            {status === "error" && <XCircle className="h-7 w-7 text-red-500" />}
           </div>
         </div>
 
         {(status === "uploading" || status === "processing") && (
           <div className="space-y-3">
             <div className="relative h-3 bg-gray-200 rounded-full overflow-hidden">
-              <div 
+              <div
                 className="absolute inset-y-0 left-0 progress-emerald rounded-full transition-all duration-300 ease-out"
                 style={{ width: `${progress}%` }}
               />
             </div>
             <div className="flex justify-between text-sm font-medium">
-              <span className="text-gray-700">
+              <span className="text-gray-300">
                 {status === "uploading" ? "Uploading..." : "Processing..."}
               </span>
               <span className="text-emerald-600">{Math.round(progress)}%</span>
@@ -81,7 +83,7 @@ export function UploadProgress({
         )}
 
         {status === "completed" && (
-          <div className="p-4 rounded-xl bg-emerald-50 border-2 border-emerald-200">
+          <div className="p-4 rounded-xl bg-emerald-900/30 border-2 border-emerald-800/50">
             <p className="text-sm font-semibold text-emerald-700">
               Upload completed! Redirecting to project dashboard...
             </p>
@@ -89,7 +91,7 @@ export function UploadProgress({
         )}
 
         {status === "error" && error && (
-          <div className="rounded-xl bg-red-50 border-2 border-red-200 p-5">
+          <div className="rounded-xl bg-red-900/20 border-2 border-red-800 p-5">
             <div className="flex items-start gap-4">
               <XCircle className="h-6 w-6 text-red-600 shrink-0 mt-0.5" />
               <div className="space-y-2 flex-1">
@@ -97,13 +99,12 @@ export function UploadProgress({
                 <p className="text-sm text-red-700 leading-relaxed">{error}</p>
 
                 {error.includes("plan limit") && (
-                  <p className="text-xs text-gray-600 mt-3 pt-3 border-t border-red-200">
-                    💡 Upgrade your plan to upload larger files or more
-                    projects
+                  <p className="text-xs text-gray-400 mt-3 pt-3 border-t border-red-800">
+                    💡 Upgrade your plan to upload larger files or more projects
                   </p>
                 )}
                 {error.includes("Authentication") && (
-                  <p className="text-xs text-gray-600 mt-3 pt-3 border-t border-red-200">
+                  <p className="text-xs text-gray-400 mt-3 pt-3 border-t border-red-800">
                     💡 Try refreshing the page or signing in again
                   </p>
                 )}

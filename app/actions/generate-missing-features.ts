@@ -1,11 +1,11 @@
 "use server";
 
-import { inngest } from "@/inngest/client";
 import { auth } from "@clerk/nextjs/server";
-import type { Id } from "@/convex/_generated/dataModel";
-import { convex } from "@/lib/convex-client";
 import { api } from "@/convex/_generated/api";
-import { PLAN_FEATURES, FEATURE_TO_JOB_MAP } from "@/lib/tier-config";
+import type { Id } from "@/convex/_generated/dataModel";
+import { inngest } from "@/inngest/client";
+import { convex } from "@/lib/convex-client";
+import { FEATURE_TO_JOB_MAP, PLAN_FEATURES } from "@/lib/tier-config";
 import type { RetryableJob } from "./retry-job";
 
 export async function generateMissingFeatures(projectId: Id<"projects">) {
@@ -47,7 +47,7 @@ export async function generateMissingFeatures(projectId: Id<"projects">) {
   for (const feature of availableFeatures) {
     const jobName =
       FEATURE_TO_JOB_MAP[feature as keyof typeof FEATURE_TO_JOB_MAP];
-    if (!jobName) continue; 
+    if (!jobName) continue;
 
     const hasData = Boolean(project[jobName as keyof typeof project]);
 
@@ -58,7 +58,7 @@ export async function generateMissingFeatures(projectId: Id<"projects">) {
 
   if (missingJobs.length === 0) {
     throw new Error(
-      "No missing features to generate. All features for your plan are already available."
+      "No missing features to generate. All features for your plan are already available.",
     );
   }
 
@@ -73,8 +73,8 @@ export async function generateMissingFeatures(projectId: Id<"projects">) {
           originalPlan,
           currentPlan,
         },
-      })
-    )
+      }),
+    ),
   );
 
   return {

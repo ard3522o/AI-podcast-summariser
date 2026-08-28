@@ -18,28 +18,35 @@ const assemblyai = new AssemblyAI({
 export async function transcribeWithAssemblyAI(
   audioUrl: string,
   projectId: Id<"projects">,
-  userPlan: PlanName = "free"
+  userPlan: PlanName = "free",
 ): Promise<TranscriptWithExtras> {
   console.log(
-    `Starting AssemblyAI transcription for project ${projectId} (${userPlan} plan)`
+    `[AssemblyAI] Starting transcription for project ${projectId} (${userPlan} plan)`,
   );
+  console.log(`[AssemblyAI] Audio URL: ${audioUrl}`);
+  console.log(`[AssemblyAI] API key present: ${!!process.env.ASSEMBLYAI_API_KEY}`);
+
+  if (!process.env.ASSEMBLYAI_API_KEY) {
+    throw new Error("ASSEMBLYAI_API_KEY is not set in environment variables");
+  }
 
   try {
+    console.log("[AssemblyAI] Calling transcripts.transcribe()...");
     const transcriptResponse = await assemblyai.transcripts.transcribe({
-      audio: audioUrl, // Public URL - AssemblyAI downloads the file
-      speaker_labels: true, // Always enable speaker diarization (UI-gated for ULTRA)
-      auto_chapters: true, // Detect topic changes automatically
-      format_text: true, // Add punctuation and capitalization
-      speech_models: ["universal-3-pro","universal-2"]
+      audio: audioUrl,
+      speaker_labels: true,
+      auto_chapters: true,
+      format_text: true,
     });
+    console.log(`[AssemblyAI] Response received. Status: ${transcriptResponse.status}`);
 
     if (transcriptResponse.status === "error") {
       throw new Error(
-        transcriptResponse.error || "AssemblyAI transcription failed"
+        transcriptResponse.error || "AssemblyAI transcription failed",
       );
     }
 
-    console.log("AssemblyAI transcription completed");
+    console.log("[AssemblyAI] Transcription completed successfully");
 
     const response = transcriptResponse as unknown as {
       text: string;
@@ -47,15 +54,15 @@ export async function transcribeWithAssemblyAI(
       chapters: AssemblyAIChapter[];
       utterances: AssemblyAIUtterance[];
       words: AssemblyAIWord[];
-      audio_duration?: number; 
+      audio_duration?: number;
     };
 
     console.log(
-      `Transcribed ${response.words?.length || 0} words, ${
+      `[AssemblyAI] Transcribed ${response.words?.length || 0} words, ${
         response.segments?.length || 0
       } segments, ${response.chapters?.length || 0} chapters, ${
         response.utterances?.length || 0
-      } speakers`
+      } speakers`,
     );
 
     const assemblySegments: AssemblyAISegment[] = response.segments || [];
@@ -82,11 +89,11 @@ export async function transcribeWithAssemblyAI(
     const speakers = assemblyUtterances.map(
       (utterance: AssemblyAIUtterance) => ({
         speaker: utterance.speaker,
-        start: utterance.start / 1000, 
-        end: utterance.end / 1000, 
+        start: utterance.start / 1000,
+        end: utterance.end / 1000,
         text: utterance.text,
         confidence: utterance.confidence,
-      })
+      }),
     );
 
     const chapters = assemblyChapters.map((chapter: AssemblyAIChapter) => ({
@@ -97,6 +104,7 @@ export async function transcribeWithAssemblyAI(
       gist: chapter.gist,
     }));
 
+    console.log("[AssemblyAI] Saving transcript to Convex...");
     await convex.mutation(api.projects.saveTranscript, {
       projectId,
       transcript: {
@@ -105,6 +113,7 @@ export async function transcribeWithAssemblyAI(
         chapters,
       },
     });
+    console.log("[AssemblyAI] Transcript saved to Convex successfully");
 
     return {
       text: response.text || "",
@@ -114,16 +123,20 @@ export async function transcribeWithAssemblyAI(
       audio_duration: response.audio_duration,
     };
   } catch (error) {
-    console.error("AssemblyAI transcription error:", error);
+    console.error("[AssemblyAI] Transcription error:", error);
 
-    await convex.mutation(api.projects.recordError, {
-      projectId,
-      message: error instanceof Error ? error.message : "Transcription failed",
-      step: "transcription",
-      details: { 
-        stack: error instanceof Error ? error.stack : String(error) 
-      },
-    });
+    try {
+      await convex.mutation(api.projects.recordError, {
+        projectId,
+        message: error instanceof Error ? error.message : "Transcription failed",
+        step: "transcription",
+        details: {
+          stack: error instanceof Error ? error.stack : String(error),
+        },
+      });
+    } catch (recordError) {
+      console.error("[AssemblyAI] Failed to record error in Convex:", recordError);
+    }
 
     throw error;
   }

@@ -24,7 +24,6 @@ export const PLAN_LIMITS: Record<PlanName, PlanLimits> = {
   },
 };
 
-
 export const FEATURES = {
   SUMMARY: "summary",
   SOCIAL_POSTS: "social_posts",
@@ -56,7 +55,6 @@ export const PLAN_FEATURES: Record<PlanName, FeatureName[]> = {
   ],
 };
 
-
 export const PLAN_NAMES: Record<PlanName, string> = {
   free: "Free",
   pro: "Pro",
@@ -68,7 +66,6 @@ export const PLAN_PRICES: Record<PlanName, string> = {
   pro: "$29/month",
   ultra: "$69/month",
 };
-
 
 export const FEATURE_TO_JOB_MAP = {
   [FEATURES.SOCIAL_POSTS]: "socialPosts",

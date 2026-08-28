@@ -10,9 +10,9 @@ import { Badge } from "@/components/ui/badge";
 import type { Doc } from "@/convex/_generated/dataModel";
 import { formatDuration, formatFileSize, formatSmartDate } from "@/lib/format";
 import {
+  getProcessingPhaseLabel,
   getStatusIcon,
   getStatusVariant,
-  getProcessingPhaseLabel,
 } from "@/lib/status-utils";
 import { cn } from "@/lib/utils";
 
@@ -71,10 +71,10 @@ export function ProjectCard({ project }: ProjectCardProps) {
               {/* Title + Status + Delete */}
               <div className="flex items-start justify-between gap-4">
                 <div className="flex-1 min-w-0 overflow-hidden">
-                  <h3 className="font-extrabold text-lg md:text-xl lg:text-2xl wrap-break-word hyphens-auto group-hover:text-emerald-600 transition-colors leading-snug">
+                  <h3 className="font-extrabold text-lg md:text-xl lg:text-2xl wrap-break-word hyphens-auto group-hover:text-emerald-400 transition-colors leading-snug">
                     {project.displayName || project.fileName}
                   </h3>
-                  <p className="text-sm text-gray-600 mt-2 font-medium">
+                  <p className="text-sm text-gray-400 mt-2 font-medium">
                     {formatSmartDate(project.createdAt)}
                   </p>
                 </div>
@@ -107,7 +107,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
                     type="button"
                     onClick={handleDelete}
                     disabled={isDeleting}
-                    className="h-10 w-10 rounded-full bg-red-50 hover:bg-red-100 flex items-center justify-center transition-all hover:scale-110 disabled:opacity-50"
+                    className="h-10 w-10 rounded-full bg-red-900/20 hover:bg-red-800/30 flex items-center justify-center transition-all hover:scale-110 disabled:opacity-50"
                   >
                     {isDeleting ? (
                       <Loader2 className="h-5 w-5 animate-spin text-red-600" />
@@ -120,14 +120,14 @@ export function ProjectCard({ project }: ProjectCardProps) {
 
               {/* Metadata with badges */}
               <div className="flex items-center gap-3 flex-wrap">
-                <Badge className="text-xs font-semibold bg-emerald-100 text-emerald-700 border-emerald-200">
+                <Badge className="text-xs font-semibold bg-emerald-900/30 text-emerald-300 border-emerald-800">
                   {formatFileSize(project.fileSize)}
                 </Badge>
-                <Badge className="text-xs font-semibold bg-emerald-100 text-emerald-700 border-emerald-200 uppercase">
+                <Badge className="text-xs font-semibold bg-emerald-900/30 text-emerald-300 border-emerald-800 uppercase">
                   {project.fileFormat}
                 </Badge>
                 {project.fileDuration && (
-                  <Badge className="text-xs font-semibold bg-emerald-100 text-emerald-700 border-emerald-200">
+                  <Badge className="text-xs font-semibold bg-emerald-900/30 text-emerald-300 border-emerald-800">
                     {formatDuration(project.fileDuration)}
                   </Badge>
                 )}
@@ -146,7 +146,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
 
               {/* Error Message */}
               {project.status === "failed" && project.error && (
-                <div className="mt-2 p-4 rounded-xl bg-red-50 border-2 border-red-200">
+                <div className="mt-2 p-4 rounded-xl bg-red-900/20 border-2 border-red-800">
                   <p className="text-sm text-red-700 font-semibold">
                     {project.error.message}
                   </p>

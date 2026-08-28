@@ -1,9 +1,9 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { useCopyToClipboard } from "@/lib/hooks/use-copy-to-clipboard";
 import { Check, Copy } from "lucide-react";
 import { SocialIcon } from "react-social-icons";
+import { Button } from "@/components/ui/button";
+import { useCopyToClipboard } from "@/lib/hooks/use-copy-to-clipboard";
 
 interface SocialPostsTabProps {
   socialPosts?: {
@@ -28,7 +28,7 @@ const PLATFORMS = [
     key: "linkedin" as const,
     title: "LinkedIn",
     url: "https://linkedin.com",
-    bgColor: "bg-blue-50",
+    bgColor: "bg-blue-900/20",
     hoverColor: "hover:bg-blue-100",
   },
   {
@@ -49,14 +49,14 @@ const PLATFORMS = [
     key: "youtube" as const,
     title: "YouTube",
     url: "https://youtube.com",
-    bgColor: "bg-red-50",
-    hoverColor: "hover:bg-red-100",
+    bgColor: "bg-red-900/20",
+    hoverColor: "hover:bg-red-800/30",
   },
   {
     key: "facebook" as const,
     title: "Facebook",
     url: "https://facebook.com",
-    bgColor: "bg-blue-50",
+    bgColor: "bg-blue-900/20",
     hoverColor: "hover:bg-blue-100",
   },
 ];
@@ -85,7 +85,7 @@ export function SocialPostsTab({ socialPosts }: SocialPostsTabProps) {
               <h3 className="font-bold text-base md:text-xl mb-1 wrap-break-word">
                 {platform.title}
               </h3>
-              <p className="text-xs md:text-sm text-gray-600">Ready to post</p>
+              <p className="text-xs md:text-sm text-gray-400">Ready to post</p>
             </div>
             <Button
               size="sm"
@@ -114,7 +114,7 @@ export function SocialPostsTab({ socialPosts }: SocialPostsTabProps) {
 
           <div className="relative">
             <div className="rounded-xl bg-white p-4 md:p-5 text-xs md:text-sm border-2 shadow-sm">
-              <p className="whitespace-pre-wrap leading-relaxed text-gray-700 wrap-break-word">
+              <p className="whitespace-pre-wrap leading-relaxed text-gray-300 wrap-break-word">
                 {socialPosts[platform.key]}
               </p>
             </div>

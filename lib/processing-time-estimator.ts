@@ -1,6 +1,6 @@
 export function estimateAssemblyAITime(durationSeconds?: number) {
   if (!durationSeconds) {
-    durationSeconds = 1800; 
+    durationSeconds = 1800;
   }
 
   const bestCaseSeconds = Math.round(durationSeconds * 0.008);

@@ -27,7 +27,7 @@ export async function HeroSection() {
               Podcasts with AI
             </h1>
 
-            <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed">
               Upload your podcast audio and get AI-generated summaries,
               transcripts, social posts, key moments, and more - all in minutes.
             </p>
@@ -72,9 +72,9 @@ export async function HeroSection() {
       </div>
 
       {/* Decorative gradient orbs */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-float"></div>
+      <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-600 rounded-full mix-blend-screen filter blur-3xl opacity-20 animate-float"></div>
       <div
-        className="absolute bottom-0 left-0 w-96 h-96 bg-teal-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-float"
+        className="absolute bottom-0 left-0 w-96 h-96 bg-teal-600 rounded-full mix-blend-screen filter blur-3xl opacity-20 animate-float"
         style={{ animationDelay: "1s" }}
       ></div>
     </section>

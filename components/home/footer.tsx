@@ -1,9 +1,9 @@
-import {Sparkles } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import Link from "next/link";
 
 export function Footer() {
   return (
-    <footer className="border-t bg-gradient-to-br from-gray-50 to-emerald-50/30">
+    <footer className="border-t bg-gradient-to-br from-gray-900 to-emerald-900/10">
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-3 gap-8 mb-8">
@@ -14,10 +14,10 @@ export function Footer() {
                   <Sparkles className="h-5 w-5 text-white" />
                 </div>
                 <span className="font-bold text-lg gradient-emerald-text">
-                  Podassi
+                  Podcasto
                 </span>
               </div>
-              <p className="text-gray-600 text-sm leading-relaxed">
+              <p className="text-gray-400 text-sm leading-relaxed">
                 AI-powered podcast processing that transforms your content into
                 engagement gold.
               </p>
@@ -25,12 +25,12 @@ export function Footer() {
 
             {/* Quick Links */}
             <div>
-              <h3 className="font-bold mb-4 text-gray-900">Quick Links</h3>
+              <h3 className="font-bold mb-4 text-white">Quick Links</h3>
               <ul className="space-y-2">
                 <li>
                   <Link
                     href="/"
-                    className="text-gray-600 hover:text-emerald-600 transition-colors text-sm"
+                    className="text-gray-400 hover:text-emerald-600 transition-colors text-sm"
                   >
                     Home
                   </Link>
@@ -38,7 +38,7 @@ export function Footer() {
                 <li>
                   <Link
                     href="/dashboard/projects"
-                    className="text-gray-600 hover:text-emerald-600 transition-colors text-sm"
+                    className="text-gray-400 hover:text-emerald-600 transition-colors text-sm"
                   >
                     Projects
                   </Link>
@@ -46,7 +46,7 @@ export function Footer() {
                 <li>
                   <Link
                     href="/dashboard/upload"
-                    className="text-gray-600 hover:text-emerald-600 transition-colors text-sm"
+                    className="text-gray-400 hover:text-emerald-600 transition-colors text-sm"
                   >
                     Upload
                   </Link>
@@ -56,12 +56,12 @@ export function Footer() {
 
             {/* Support */}
             <div>
-              <h3 className="font-bold mb-4 text-gray-900">Support</h3>
+              <h3 className="font-bold mb-4 text-white">Support</h3>
               <ul className="space-y-2">
                 <li>
                   <Link
                     href="#"
-                    className="text-gray-600 hover:text-emerald-600 transition-colors text-sm"
+                    className="text-gray-400 hover:text-emerald-600 transition-colors text-sm"
                   >
                     Documentation
                   </Link>
@@ -69,7 +69,7 @@ export function Footer() {
                 <li>
                   <Link
                     href="#"
-                    className="text-gray-600 hover:text-emerald-600 transition-colors text-sm"
+                    className="text-gray-400 hover:text-emerald-600 transition-colors text-sm"
                   >
                     Contact Us
                   </Link>
@@ -77,7 +77,7 @@ export function Footer() {
                 <li>
                   <Link
                     href="#"
-                    className="text-gray-600 hover:text-emerald-600 transition-colors text-sm"
+                    className="text-gray-400 hover:text-emerald-600 transition-colors text-sm"
                   >
                     Privacy Policy
                   </Link>
@@ -87,9 +87,9 @@ export function Footer() {
           </div>
 
           {/* Bottom bar */}
-          <div className="pt-8 border-t border-gray-200">
-            <p className="text-center text-sm text-gray-600">
-              {new Date().getFullYear()} Podassi. This is a demo project.
+          <div className="pt-8 border-t border-gray-700">
+            <p className="text-center text-sm text-gray-400">
+              {new Date().getFullYear()} Podcasto. This is a demo project.
             </p>
           </div>
         </div>

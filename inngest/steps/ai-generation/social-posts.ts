@@ -1,13 +1,11 @@
 import type { step as InngestStep } from "inngest";
-import type OpenAI from "openai";
-import { zodResponseFormat } from "openai/helpers/zod";
-import { openai } from "../../lib/openai-client";
 import { type SocialPosts, socialPostsSchema } from "@/schemas/ai-outputs";
 import type { TranscriptWithExtras } from "@/types/assemblyai";
+import { openai } from "../../lib/openai-client";
 
 const SOCIAL_SYSTEM_PROMPT =
   "You are a viral social media marketing expert who understands each platform's unique audience, tone, and best practices. You create platform-optimized content that drives engagement and grows audiences. You MUST respond with a valid JSON object containing exactly these keys: 'twitter', 'linkedin', 'instagram', 'tiktok', 'youtube', and 'facebook', where each key maps to a string containing the respective post.";
-  
+
 function buildSocialPrompt(transcript: TranscriptWithExtras): string {
   return `Create platform-specific promotional posts for this podcast episode.
 
@@ -72,26 +70,25 @@ Make each post unique and truly optimized for that platform. No generic content.
 
 export async function generateSocialPosts(
   step: typeof InngestStep,
-  transcript: TranscriptWithExtras
+  transcript: TranscriptWithExtras,
 ): Promise<SocialPosts> {
-  console.log("Generating social posts with GPT-4");
+  console.log("[SocialPosts] Generating social posts with Gemini...");
 
   try {
-    const createCompletion = openai.chat.completions.create.bind(
-      openai.chat.completions
-    );
+    console.log("[SocialPosts] Calling Gemini API...");
 
-    const response = (await step.ai.wrap(
-      "generate-social-posts-with-llama-3.3-70b-versatile",
-      createCompletion,
-      {
-        model: "llama-3.3-70b-versatile",
+    const response = await step.run("call-groq-social-posts", async () => {
+      return openai.chat.completions.create({
+        model: "gemini-3.5-flash",
         messages: [
           { role: "system", content: SOCIAL_SYSTEM_PROMPT },
           { role: "user", content: buildSocialPrompt(transcript) },
         ],
-response_format: { type: "json_object" },      }
-    )) as OpenAI.Chat.Completions.ChatCompletion;
+        response_format: { type: "json_object" },
+      });
+    });
+
+    console.log("[SocialPosts] Gemini response received");
 
     const content = response.choices[0]?.message?.content;
     const socialPosts = content
@@ -107,7 +104,7 @@ response_format: { type: "json_object" },      }
 
     if (socialPosts.twitter.length > 280) {
       console.warn(
-        `Twitter post exceeded 280 chars (${socialPosts.twitter.length}), truncating...`
+        `Twitter post exceeded 280 chars (${socialPosts.twitter.length}), truncating...`,
       );
       socialPosts.twitter = `${socialPosts.twitter.substring(0, 277)}...`;
     }

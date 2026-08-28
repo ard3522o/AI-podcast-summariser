@@ -1,27 +1,26 @@
 import type { step as InngestStep } from "inngest";
-import type OpenAI from "openai";
 import { formatTimestamp } from "@/lib/format";
-import { openai } from "../../lib/openai-client";
 import type { TranscriptWithExtras } from "@/types/assemblyai";
+import { openai } from "../../lib/openai-client";
 
 type YouTubeTimestamp = {
-  timestamp: string; 
-  description: string; 
+  timestamp: string;
+  description: string;
 };
 
 export async function generateYouTubeTimestamps(
   step: typeof InngestStep,
-  transcript: TranscriptWithExtras
+  transcript: TranscriptWithExtras,
 ): Promise<YouTubeTimestamp[]> {
   console.log(
-    "Generating YouTube timestamps from AssemblyAI chapters with AI-enhanced titles"
+    "Generating YouTube timestamps from AssemblyAI chapters with AI-enhanced titles",
   );
 
   const chapters = transcript.chapters || [];
 
   if (!chapters || chapters.length === 0) {
     throw new Error(
-      "No chapters available from AssemblyAI. Cannot generate YouTube timestamps."
+      "No chapters available from AssemblyAI. Cannot generate YouTube timestamps.",
     );
   }
 
@@ -32,9 +31,9 @@ export async function generateYouTubeTimestamps(
   const chapterData = chaptersToUse.map((chapter, idx) => ({
     index: idx,
     timestamp: Math.floor(chapter.start / 1000),
-    headline: chapter.headline, 
-    summary: chapter.summary, 
-    gist: chapter.gist, 
+    headline: chapter.headline,
+    summary: chapter.summary,
+    gist: chapter.gist,
   }));
 
   const prompt = `You are a YouTube content optimization expert. Create SHORT CHAPTER TITLES for a video.
@@ -53,7 +52,7 @@ CHAPTERS:
 ${chapterData
   .map(
     (ch, idx) =>
-      `Chapter ${idx}: [${ch.timestamp}s]\nContext: ${ch.headline}\nSummary: ${ch.summary}`
+      `Chapter ${idx}: [${ch.timestamp}s]\nContext: ${ch.headline}\nSummary: ${ch.summary}`,
   )
   .join("\n\n")}
 
@@ -83,16 +82,12 @@ Return ONLY valid JSON in this exact format:
 
 Remember: Create TITLES, not transcript excerpts!`;
 
-  const createCompletion = openai.chat.completions.create.bind(
-    openai.chat.completions
-  );
+  console.log("[YouTubeTimestamps] Calling Gemini API...");
 
-  const response = (await step.ai.wrap(
-    "generate-youtube-titles-with-llama-3.3-70b-versatile",
-    createCompletion,
-    {
-      model: "llama-3.3-70b-versatile",
-      response_format: { type: "json_object" }, 
+  const response = await step.run("call-groq-youtube-timestamps", async () => {
+    return openai.chat.completions.create({
+      model: "gemini-3.5-flash",
+      response_format: { type: "json_object" },
       messages: [
         {
           role: "system",
@@ -104,9 +99,11 @@ Remember: Create TITLES, not transcript excerpts!`;
           content: prompt,
         },
       ],
-      max_completion_tokens: 1500, 
-    }
-  )) as OpenAI.Chat.Completions.ChatCompletion;
+      max_completion_tokens: 1500,
+    });
+  });
+
+  console.log("[YouTubeTimestamps] Gemini response received");
 
   const content = response.choices[0]?.message?.content || '{"titles":[]}';
 
@@ -130,7 +127,7 @@ Remember: Create TITLES, not transcript excerpts!`;
 
     if (!aiTitle) {
       console.warn(
-        `No AI title found for chapter ${chapter.index}, using fallback: "${chapter.headline}"`
+        `No AI title found for chapter ${chapter.index}, using fallback: "${chapter.headline}"`,
       );
     }
 
@@ -142,7 +139,7 @@ Remember: Create TITLES, not transcript excerpts!`;
 
   console.log(
     `Generated ${aiTimestamps.length} YouTube timestamps (first 3):`,
-    aiTimestamps.slice(0, 3).map((t) => `${t.timestamp}s: ${t.description}`)
+    aiTimestamps.slice(0, 3).map((t) => `${t.timestamp}s: ${t.description}`),
   );
 
   const youtubeTimestamps = aiTimestamps.map((item) => ({

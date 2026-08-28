@@ -32,7 +32,7 @@ export function CompactProgress({
     jobStatus?.hashtags,
     jobStatus?.youtubeTimestamps,
   ];
-  
+
   const completedSteps = contentSteps.filter((s) => s === "completed").length;
   const totalSteps = contentSteps.length;
 
@@ -57,7 +57,7 @@ export function CompactProgress({
 
   // 4. NOW we can safely do our early return!
   if (!jobStatus) {
-    return null; 
+    return null;
   }
 
   const statusText = isTranscribing
@@ -67,7 +67,7 @@ export function CompactProgress({
   return (
     <div className="space-y-2">
       <div className="flex items-center justify-between">
-        <Badge className="text-xs font-semibold bg-emerald-100 text-emerald-700 border-emerald-200">
+        <Badge className="text-xs font-semibold bg-emerald-900/30 text-emerald-300 border-emerald-800">
           {statusText}
         </Badge>
         <span className="text-xs font-bold text-emerald-600">
@@ -75,7 +75,7 @@ export function CompactProgress({
         </span>
       </div>
       <div className="relative h-2 bg-emerald-100 rounded-full overflow-hidden">
-        <div 
+        <div
           className="absolute inset-y-0 left-0 progress-emerald rounded-full transition-all duration-300"
           style={{ width: `${progress}%` }}
         />

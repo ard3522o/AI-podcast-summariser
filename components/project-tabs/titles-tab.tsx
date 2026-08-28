@@ -51,7 +51,7 @@ export function TitlesTab({ titles }: TitlesTabProps) {
                   key={title}
                   className="p-3 md:p-4 glass-card rounded-xl border-l-4 border-l-emerald-400"
                 >
-                  <p className="text-sm md:text-base text-gray-700 font-medium wrap-break-word">
+                  <p className="text-sm md:text-base text-gray-300 font-medium wrap-break-word">
                     {title}
                   </p>
                 </li>

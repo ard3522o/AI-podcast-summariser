@@ -1,7 +1,7 @@
 "use client";
 
-import { CheckCircle2, Clock, Loader2 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { CheckCircle2, Clock, Loader2 } from "lucide-react";
 import type { PhaseStatus } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
@@ -57,8 +57,8 @@ export function PhaseCard({
               />
             </div>
             <div>
-              <h3 className="text-2xl font-extrabold text-gray-900">{title}</h3>
-              <p className="text-base text-gray-600 mt-1">{description}</p>
+              <h3 className="text-2xl font-extrabold text-white">{title}</h3>
+              <p className="text-base text-gray-400 mt-1">{description}</p>
             </div>
           </div>
 
@@ -82,7 +82,7 @@ export function PhaseCard({
             </div>
             <div className="flex items-center justify-between text-sm font-medium">
               {timeEstimate && (
-                <div className="flex items-center gap-2 text-gray-600">
+                <div className="flex items-center gap-2 text-gray-400">
                   <Clock className="h-5 w-5" />
                   <span>Estimated: {timeEstimate}</span>
                 </div>
@@ -95,7 +95,7 @@ export function PhaseCard({
         )}
 
         {!isRunning && timeEstimate && (
-          <div className="flex items-center gap-2 text-sm font-medium text-gray-600">
+          <div className="flex items-center gap-2 text-sm font-medium text-gray-400">
             <Clock className="h-5 w-5" />
             <span>Estimated: {timeEstimate}</span>
           </div>

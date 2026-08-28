@@ -8,7 +8,7 @@ import { toast } from "sonner";
 import {
   createProjectAction,
   validateUploadAction,
-} from "@/actions/projects";
+} from "@/app/actions/projects";
 import { Button } from "@/components/ui/button";
 import { UploadDropzone } from "@/components/upload-dropzone";
 import { UploadProgress } from "@/components/upload-progress";

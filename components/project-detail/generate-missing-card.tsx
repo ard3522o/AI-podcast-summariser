@@ -1,11 +1,11 @@
 "use client";
 
-import { generateMissingFeatures } from "@/app/actions/generate-missing-features";
-import { Button } from "@/components/ui/button";
-import type { Id } from "@/convex/_generated/dataModel";
 import { Sparkles } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
+import { generateMissingFeatures } from "@/app/actions/generate-missing-features";
+import { Button } from "@/components/ui/button";
+import type { Id } from "@/convex/_generated/dataModel";
 
 interface GenerateMissingCardProps {
   projectId: Id<"projects">;
@@ -37,10 +37,10 @@ export function GenerateMissingCard({
     <div
       className={`glass-card rounded-2xl p-12 text-center space-y-6 ${className}`}
     >
-      <p className="text-gray-600 text-lg">
+      <p className="text-gray-400 text-lg">
         {message || "No content available"}
       </p>
-      <p className="text-sm text-gray-500">
+      <p className="text-sm text-gray-400">
         It looks like this project was processed before you upgraded.
       </p>
       <Button
@@ -51,7 +51,7 @@ export function GenerateMissingCard({
         <Sparkles className="h-5 w-5" />
         {isGenerating ? "Generating..." : "Generate All Missing Features"}
       </Button>
-      <p className="text-xs text-gray-500">
+      <p className="text-xs text-gray-400">
         This will generate all features available in your current plan
       </p>
     </div>

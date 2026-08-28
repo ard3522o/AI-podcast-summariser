@@ -23,16 +23,16 @@ export function TranscriptTab({ projectId, transcript }: TranscriptTabProps) {
   const hasSpeakers = transcript.speakers && transcript.speakers.length > 0;
 
   const speakerColors = [
-    "gradient-emerald text-white", 
-    "bg-blue-500 text-white", 
-    "bg-rose-500 text-white", 
+    "gradient-emerald text-white",
+    "bg-blue-500 text-white",
+    "bg-rose-500 text-white",
     "bg-amber-500 text-white",
-    "bg-purple-500 text-white", 
-    "bg-cyan-500 text-white", 
-    "bg-pink-500 text-white", 
-    "bg-indigo-500 text-white", 
+    "bg-purple-500 text-white",
+    "bg-cyan-500 text-white",
+    "bg-pink-500 text-white",
+    "bg-indigo-500 text-white",
     "bg-orange-500 text-white",
-    "bg-teal-500 text-white", 
+    "bg-teal-500 text-white",
   ];
 
   const getSpeakerColor = (speaker: string) => {
@@ -80,7 +80,7 @@ export function TranscriptTab({ projectId, transcript }: TranscriptTabProps) {
           <h3 className="text-xl md:text-2xl font-bold gradient-emerald-text mb-2">
             Speaker Dialogue
           </h3>
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-gray-400">
             AssemblyAI identified{" "}
             {new Set(transcript.speakers?.map((s) => s.speaker)).size}{" "}
             speaker(s) in this podcast
@@ -109,11 +109,11 @@ export function TranscriptTab({ projectId, transcript }: TranscriptTabProps) {
                       .toISOString()
                       .substr(11, 8)}
                   </Badge>
-                  <span className="text-xs text-gray-500">
+                  <span className="text-xs text-gray-400">
                     {Math.round(utterance.confidence * 100)}% confidence
                   </span>
                 </div>
-                <p className="text-sm md:text-base text-gray-700 leading-relaxed break-words">
+                <p className="text-sm md:text-base text-gray-300 leading-relaxed break-words">
                   {utterance.text}
                 </p>
               </div>

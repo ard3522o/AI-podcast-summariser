@@ -9,17 +9,16 @@ import type {
 } from "@/schemas/ai-outputs";
 
 type KeyMoment = {
-  time: string; 
+  time: string;
   timestamp: number;
-  text: string; 
-  description: string; 
+  text: string;
+  description: string;
 };
 
 type YouTubeTimestamp = {
-  timestamp: string; 
-  description: string; 
+  timestamp: string;
+  description: string;
 };
-
 
 type GeneratedContent = {
   keyMoments?: KeyMoment[];
@@ -30,10 +29,9 @@ type GeneratedContent = {
   youtubeTimestamps?: YouTubeTimestamp[];
 };
 
-
 export async function saveResultsToConvex(
   projectId: Id<"projects">,
-  results: GeneratedContent
+  results: GeneratedContent,
 ): Promise<void> {
   await convex.mutation(api.projects.saveGeneratedContent, {
     projectId,

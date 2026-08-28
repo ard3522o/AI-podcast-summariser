@@ -4,9 +4,8 @@ import {
   type LucideIcon,
   MessageSquare,
   Sparkles,
-  Upload,
-  Zap,
   Users,
+  Zap,
 } from "lucide-react";
 
 interface Feature {
@@ -63,7 +62,7 @@ export function FeaturesSection() {
             Everything You Need in{" "}
             <span className="gradient-emerald-text">One Platform</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
             Powerful AI tools to amplify your podcast's reach and engagement
           </p>
         </div>
@@ -80,10 +79,12 @@ export function FeaturesSection() {
                 <div className="rounded-2xl gradient-emerald p-4 w-fit mb-6 group-hover:animate-pulse-emerald transition-all">
                   <Icon className="h-8 w-8 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold mb-3 group-hover:text-emerald-600 transition-colors">
+                <h3 className="text-2xl font-bold mb-3 group-hover:text-emerald-400 transition-colors">
                   {feature.title}
                 </h3>
-                <p className="text-gray-600 leading-relaxed">{feature.description}</p>
+                <p className="text-gray-400 leading-relaxed">
+                  {feature.description}
+                </p>
               </div>
             );
           })}

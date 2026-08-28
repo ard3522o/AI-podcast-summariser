@@ -16,9 +16,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://ai-podcast-youtube-saas-tau.vercel.app/"),
-  title: "YouTube Podcast Summarizer",
-  description: "Summarizes the podcast clip",
+  metadataBase: new URL("https://podcasto.vercel.app/"),
+  title: "Podcasto",
+  description: "AI-powered podcast summarizer and content generator",
   openGraph: {
     images: ["/logo.png"],
   },
@@ -32,15 +32,15 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <ConvexClientProvider>
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-        <Toaster />
-      </body>
-    </html>
-    </ConvexClientProvider>
+        <html lang="en">
+          <body
+            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+          >
+            {children}
+            <Toaster />
+          </body>
+        </html>
+      </ConvexClientProvider>
     </ClerkProvider>
   );
 }

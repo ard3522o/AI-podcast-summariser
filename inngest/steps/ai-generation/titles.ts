@@ -1,13 +1,10 @@
 import type { step as InngestStep } from "inngest";
-import type OpenAI from "openai";
-import { zodResponseFormat } from "openai/helpers/zod";
-import { openai } from "../../lib/openai-client";
 import { type Titles, titlesSchema } from "@/schemas/ai-outputs";
 import type { TranscriptWithExtras } from "@/types/assemblyai";
+import { openai } from "../../lib/openai-client";
 
 const TITLES_SYSTEM_PROMPT =
   "You are an expert in SEO, content marketing, and viral content creation. You understand what makes titles clickable while maintaining credibility and search rankings. You MUST respond with a valid JSON object containing exactly these keys: 'youtubeShort' (array of strings), 'youtubeLong' (array of strings), 'podcastTitles' (array of strings), and 'seoKeywords' (array of strings).";
-  
 
 function buildTitlesPrompt(transcript: TranscriptWithExtras): string {
   return `Create optimized titles for this podcast episode.
@@ -52,29 +49,27 @@ Generate 4 types of titles:
 Make titles compelling, accurate, and optimized for discovery.`;
 }
 
-
 export async function generateTitles(
   step: typeof InngestStep,
   transcript: TranscriptWithExtras,
 ): Promise<Titles> {
-  console.log("Generating title suggestions with GPT-4");
+  console.log("[Titles] Generating titles with Gemini...");
 
   try {
-    const createCompletion = openai.chat.completions.create.bind(
-      openai.chat.completions,
-    );
+    console.log("[Titles] Calling Gemini API...");
 
-    const response = (await step.ai.wrap(
-      "generate-titles-with-llama-3.3-70b-versatile",
-      createCompletion,
-      {
-        model: "llama-3.3-70b-versatile",
+    const response = await step.run("call-groq-titles", async () => {
+      return openai.chat.completions.create({
+        model: "gemini-3.5-flash",
         messages: [
           { role: "system", content: TITLES_SYSTEM_PROMPT },
           { role: "user", content: buildTitlesPrompt(transcript) },
         ],
-response_format: { type: "json_object" },      },
-    )) as OpenAI.Chat.Completions.ChatCompletion;
+        response_format: { type: "json_object" },
+      });
+    });
+
+    console.log("[Titles] Gemini response received");
 
     const titlesContent = response.choices[0]?.message?.content;
     const titles = titlesContent

@@ -1,9 +1,7 @@
 import type { step as InngestStep } from "inngest";
-import type OpenAI from "openai";
-import { zodResponseFormat } from "openai/helpers/zod";
-import { openai } from "../../lib/openai-client";
 import { type Summary, summarySchema } from "@/schemas/ai-outputs";
 import type { TranscriptWithExtras } from "@/types/assemblyai";
+import { openai } from "../../lib/openai-client";
 
 const SUMMARY_SYSTEM_PROMPT =
   "You are an expert podcast content analyst and marketing strategist. Your summaries are engaging, insightful, and highlight the most valuable takeaways for listeners.You MUST respond with a valid JSON object containing exactly these keys: 'full' (string), 'bullets' (array of strings), 'insights' (array of strings), and 'tldr' (string)";
@@ -51,27 +49,25 @@ Be specific, engaging, and valuable. Focus on what makes this podcast unique and
 
 export async function generateSummary(
   step: typeof InngestStep,
-  transcript: TranscriptWithExtras
+  transcript: TranscriptWithExtras,
 ): Promise<Summary> {
-  console.log("Generating podcast summary with GPT-4");
+  console.log("[Summary] Generating podcast summary with Gemini...");
 
   try {
-    const createCompletion = openai.chat.completions.create.bind(
-      openai.chat.completions
-    );
+    console.log("[Summary] Calling Gemini API...");
 
-    const response = (await step.ai.wrap(
-      "generate-summary-with-",
-      createCompletion,
-      {
-        model: "llama-3.3-70b-versatile", 
+    const response = await step.run("call-groq-summary", async () => {
+      return openai.chat.completions.create({
+        model: "gemini-3.5-flash",
         messages: [
           { role: "system", content: SUMMARY_SYSTEM_PROMPT },
           { role: "user", content: buildSummaryPrompt(transcript) },
         ],
         response_format: { type: "json_object" },
-      }
-    )) as OpenAI.Chat.Completions.ChatCompletion;
+      });
+    });
+
+    console.log("[Summary] Gemini response received");
 
     const content = response.choices[0]?.message?.content;
     const summary = content
@@ -85,10 +81,10 @@ export async function generateSummary(
 
     return summary;
   } catch (error) {
-    console.error("llama-3.3-70b-versatile summary generation error:", error);
+    console.error("gemini-3.5-flash summary generation error:", error);
 
     return {
-      full: "⚠️ Error generating summary with llama-3.3-70b-versatile. Please check logs or try again.",
+      full: "⚠️ Error generating summary with gemini-3.5-flash. Please check logs or try again.",
       bullets: ["Summary generation failed - see full transcript"],
       insights: ["Error occurred during AI generation"],
       tldr: "Summary generation failed",

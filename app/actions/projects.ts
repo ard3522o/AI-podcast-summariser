@@ -23,7 +23,7 @@ export async function validateUploadAction(input: {
     authObj,
     userId,
     input.fileSize,
-    input.duration
+    input.duration,
   );
 
   if (!validation.allowed) {
@@ -75,7 +75,7 @@ export async function createProjectAction(input: CreateProjectInput) {
       authObj,
       userId,
       fileSize || 0,
-      fileDuration
+      fileDuration,
     );
 
     if (!validation.allowed) {
@@ -97,10 +97,10 @@ export async function createProjectAction(input: CreateProjectInput) {
     await inngest.send({
       name: "podcast/uploaded",
       data: {
-        projectId, 
+        projectId,
         userId,
-        plan, 
-        fileUrl, 
+        plan,
+        fileUrl,
         fileName,
         fileSize: fileSize || 0,
         mimeType: mimeType,
@@ -110,7 +110,7 @@ export async function createProjectAction(input: CreateProjectInput) {
     return { success: true, projectId };
   } catch (error) {
     console.error("Error creating project:", error);
-    throw error; 
+    throw error;
   }
 }
 
@@ -141,7 +141,7 @@ export async function deleteProjectAction(projectId: Id<"projects">) {
 
 export async function updateDisplayNameAction(
   projectId: Id<"projects">,
-  displayName: string
+  displayName: string,
 ) {
   try {
     const { userId } = await auth();

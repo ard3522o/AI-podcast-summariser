@@ -30,7 +30,7 @@ export function UploadDropzone({
   const { getRootProps, getInputProps, isDragActive, fileRejections } =
     useDropzone({
       onDrop,
-      accept:ALLOWED_AUDIO_TYPES,
+      accept: ALLOWED_AUDIO_TYPES,
       maxSize, // File size limit (validates before upload)
       maxFiles: 1, // Only allow single file selection
       disabled, // Disable dropzone during upload
@@ -44,20 +44,25 @@ export function UploadDropzone({
         {...getRootProps()}
         className={cn(
           "border-3 border-dashed rounded-2xl p-16 text-center cursor-pointer transition-all",
-          "border-emerald-300 hover:border-emerald-500 hover:bg-emerald-50/50",
-          isDragActive && "border-emerald-600 bg-emerald-50 scale-[1.02] shadow-xl",
+          "border-emerald-300 hover:border-emerald-500 hover:bg-emerald-900/20",
+          isDragActive &&
+            "border-emerald-600 bg-emerald-900/30 scale-[1.02] shadow-xl",
           disabled && "opacity-50 cursor-not-allowed",
-          errorMessage && "border-red-400 bg-red-50/30",
-          !disabled && "hover-glow"
+          errorMessage && "border-red-400 bg-red-900/20/30",
+          !disabled && "hover-glow",
         )}
       >
         <input {...getInputProps()} />
 
         <div className="flex flex-col items-center gap-6">
-          <div className={cn(
-            "rounded-3xl p-8 transition-all",
-            isDragActive ? "gradient-emerald animate-pulse-emerald shadow-2xl scale-110" : "glass-card"
-          )}>
+          <div
+            className={cn(
+              "rounded-3xl p-8 transition-all",
+              isDragActive
+                ? "gradient-emerald animate-pulse-emerald shadow-2xl scale-110"
+                : "glass-card",
+            )}
+          >
             {isDragActive ? (
               <Upload className="h-16 w-16 text-white animate-bounce" />
             ) : (
@@ -66,19 +71,17 @@ export function UploadDropzone({
           </div>
 
           <div className="space-y-3">
-            <p className="text-2xl font-bold text-gray-900">
+            <p className="text-2xl font-bold text-white">
               {isDragActive
                 ? "Drop your podcast file here"
                 : "Drag & drop your podcast file"}
             </p>
-            <p className="text-base text-gray-600">
-              or click to browse files
-            </p>
+            <p className="text-base text-gray-400">or click to browse files</p>
             <div className="pt-2 space-y-1">
-              <p className="text-sm text-gray-500 font-medium">
+              <p className="text-sm text-gray-400 font-medium">
                 Supports: MP3, WAV, M4A, FLAC, OGG, AAC, and more
               </p>
-              <p className="text-sm text-gray-500 font-semibold">
+              <p className="text-sm text-gray-400 font-semibold">
                 Maximum file size: {Math.round(maxSize / (1024 * 1024))}MB
               </p>
             </div>
@@ -87,7 +90,7 @@ export function UploadDropzone({
       </div>
 
       {errorMessage && (
-        <div className="mt-4 p-4 rounded-xl bg-red-50 border border-red-200">
+        <div className="mt-4 p-4 rounded-xl bg-red-900/20 border border-red-800">
           <p className="text-sm text-red-600 font-medium">{errorMessage}</p>
         </div>
       )}

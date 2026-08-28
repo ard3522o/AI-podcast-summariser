@@ -1,10 +1,9 @@
-
 import bytes from "bytes";
 import { format } from "date-fns";
 import { MS_PER_DAY, MS_PER_HOUR, MS_PER_MINUTE } from "./constants";
 
 export function formatFileSize(size: number): string {
-  return bytes(size, { unitSeparator: " " })??"0 B";
+  return bytes(size, { unitSeparator: " " }) ?? "0 B";
 }
 
 export function formatDuration(seconds: number): string {
@@ -14,19 +13,18 @@ export function formatDuration(seconds: number): string {
 
   if (hours > 0) {
     return `${hours}:${String(minutes).padStart(2, "0")}:${String(
-      secs
+      secs,
     ).padStart(2, "0")}`;
   }
   return `${minutes}:${String(secs).padStart(2, "0")}`;
 }
-
 
 export function formatTimestamp(
   seconds: number,
   options?: {
     padHours?: boolean;
     forceHours?: boolean;
-  }
+  },
 ): string {
   const { padHours = true, forceHours = false } = options || {};
 

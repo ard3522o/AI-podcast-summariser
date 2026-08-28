@@ -12,7 +12,7 @@ export function PageHeader() {
           <h1 className="text-4xl md:text-5xl font-extrabold mb-3">
             My <span className="gradient-emerald-text">Projects</span>
           </h1>
-          <p className="text-lg text-gray-600">
+          <p className="text-lg text-gray-400">
             Manage and view all your podcast projects
           </p>
         </div>

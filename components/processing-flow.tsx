@@ -15,9 +15,9 @@ import {
   estimateAssemblyAITime,
   formatTimeRange,
 } from "@/lib/processing-time-estimator";
-import type { PhaseStatus } from "@/lib/types";
-import { PLAN_FEATURES, FEATURES, type FeatureName } from "@/lib/tier-config";
+import { FEATURES, type FeatureName, PLAN_FEATURES } from "@/lib/tier-config";
 import { getMinimumPlanForFeature } from "@/lib/tier-utils";
+import type { PhaseStatus } from "@/lib/types";
 
 interface ProcessingFlowProps {
   transcriptionStatus: PhaseStatus;
@@ -187,8 +187,8 @@ export function ProcessingFlow({
               );
             })}
 
-            <div className="bg-gradient-to-r from-emerald-50 to-teal-50 rounded-2xl p-6 text-center mt-6 border-2 border-emerald-200 shadow-lg">
-              <p className="text-sm text-gray-700 leading-relaxed">
+            <div className="bg-gradient-to-r from-emerald-900/30 to-teal-900/20 rounded-2xl p-6 text-center mt-6 border-2 border-emerald-800/50 shadow-lg">
+              <p className="text-sm text-gray-300 leading-relaxed">
                 <span className="font-bold text-emerald-600 text-base">
                   Powered by Inngest
                 </span>{" "}

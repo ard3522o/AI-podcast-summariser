@@ -1,5 +1,6 @@
 import { api } from "@/convex/_generated/api";
 import { inngest } from "@/inngest/client";
+import { convex } from "@/lib/convex-client";
 import type { PlanName } from "@/lib/tier-config";
 import { generateHashtags } from "../steps/ai-generation/hashtags";
 import { generateKeyMoments } from "../steps/ai-generation/key-moments";
@@ -9,7 +10,6 @@ import { generateTitles } from "../steps/ai-generation/titles";
 import { generateYouTubeTimestamps } from "../steps/ai-generation/youtube-timestamps";
 import { saveResultsToConvex } from "../steps/persistence/save-to-convex";
 import { transcribeWithAssemblyAI } from "../steps/transcription/assemblyai";
-import { convex } from "@/lib/convex-client";
 
 export const podcastProcessor = inngest.createFunction(
   {
@@ -20,11 +20,14 @@ export const podcastProcessor = inngest.createFunction(
   { event: "podcast/uploaded" },
   async ({ event, step }) => {
     const { projectId, fileUrl, plan: userPlan } = event.data;
-    const plan = (userPlan as PlanName) || "free"; 
+    const plan = (userPlan as PlanName) || "free";
 
-    console.log(`Processing project ${projectId} for ${plan} plan`);
+    console.log(`[Inngest] Processing project ${projectId} for ${plan} plan`);
+    console.log(`[Inngest] File URL: ${event.data.fileUrl}`);
+    console.log(`[Inngest] User ID: ${event.data.userId}`);
 
     try {
+      console.log("[Inngest] Step 1: Updating status to processing...");
       await step.run("update-status-processing", async () => {
         await convex.mutation(api.projects.updateProjectStatus, {
           projectId,
@@ -32,6 +35,7 @@ export const podcastProcessor = inngest.createFunction(
         });
       });
 
+      console.log("[Inngest] Step 2: Setting transcription to running...");
       await step.run("update-job-status-transcription-running", async () => {
         await convex.mutation(api.projects.updateJobStatus, {
           projectId,
@@ -39,10 +43,13 @@ export const podcastProcessor = inngest.createFunction(
         });
       });
 
+      console.log("[Inngest] Step 3: Starting transcription...");
       const transcript = await step.run("transcribe-audio", () =>
-        transcribeWithAssemblyAI(fileUrl, projectId, plan)
+        transcribeWithAssemblyAI(fileUrl, projectId, plan),
       );
+      console.log(`[Inngest] Transcription completed. Text length: ${transcript.text?.length || 0}`);
 
+      console.log("[Inngest] Step 4: Marking transcription completed...");
       await step.run("update-job-status-transcription-completed", async () => {
         await convex.mutation(api.projects.updateJobStatus, {
           projectId,
@@ -50,6 +57,7 @@ export const podcastProcessor = inngest.createFunction(
         });
       });
 
+      console.log("[Inngest] Step 5: Starting AI content generation...");
       await step.run("update-job-status-generation-running", async () => {
         await convex.mutation(api.projects.updateJobStatus, {
           projectId,
@@ -84,13 +92,14 @@ export const podcastProcessor = inngest.createFunction(
         jobNames.push("youtubeTimestamps");
       } else {
         console.log(
-          `Skipping key moments and YouTube timestamps for ${plan} plan`
+          `Skipping key moments and YouTube timestamps for ${plan} plan`,
         );
       }
 
+      console.log(`[Inngest] Running ${jobs.length} AI jobs in parallel...`);
       const results = await Promise.allSettled(jobs);
+      console.log("[Inngest] AI jobs completed");
 
-      
       const generatedContent: Record<string, any> = {};
 
       results.forEach((result, idx) => {
@@ -100,7 +109,6 @@ export const podcastProcessor = inngest.createFunction(
         }
       });
 
-      
       const jobErrors: Record<string, string> = {};
 
       results.forEach((result, idx) => {
@@ -121,7 +129,7 @@ export const podcastProcessor = inngest.createFunction(
           convex.mutation(api.projects.saveJobErrors, {
             projectId,
             jobErrors,
-          })
+          }),
         );
       }
 
@@ -133,7 +141,7 @@ export const podcastProcessor = inngest.createFunction(
       });
 
       await step.run("save-results-to-convex", () =>
-        saveResultsToConvex(projectId, generatedContent)
+        saveResultsToConvex(projectId, generatedContent),
       );
 
       return { success: true, projectId, plan };
@@ -147,7 +155,7 @@ export const podcastProcessor = inngest.createFunction(
             error instanceof Error ? error.message : "Unknown error occurred",
           step: "workflow",
           details: {
-            stack : error instanceof Error ? error.stack : String(error),
+            stack: error instanceof Error ? error.stack : String(error),
           },
         });
       } catch (cleanupError) {
@@ -156,5 +164,5 @@ export const podcastProcessor = inngest.createFunction(
 
       throw error;
     }
-  }
+  },
 );

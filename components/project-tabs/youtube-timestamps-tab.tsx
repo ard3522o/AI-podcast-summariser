@@ -1,8 +1,8 @@
 "use client";
 
+import { Check, Copy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCopyToClipboard } from "@/lib/hooks/use-copy-to-clipboard";
-import { Check, Copy } from "lucide-react";
 
 type YouTubeTimestamp = {
   timestamp: string;
@@ -39,7 +39,7 @@ export function YouTubeTimestampsTab({
           <h3 className="text-xl md:text-2xl font-bold gradient-emerald-text mb-2">
             YouTube Timestamps
           </h3>
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-gray-400">
             Copy these timestamps and paste them into your YouTube video
             description. YouTube will automatically create clickable chapter
             markers.
@@ -64,14 +64,14 @@ export function YouTubeTimestampsTab({
       </div>
 
       <div className="space-y-6">
-        <div className="glass-card rounded-xl p-4 md:p-5 bg-linear-to-br from-emerald-50 to-teal-50 border border-emerald-100">
+        <div className="glass-card rounded-xl p-4 md:p-5 bg-linear-to-br from-emerald-900/30 to-teal-900/20 border border-emerald-800/50">
           <pre className="whitespace-pre-wrap font-mono text-xs md:text-sm wrap-break-word text-gray-800">
             {formattedTimestamps}
           </pre>
         </div>
 
-        <div className="space-y-4 pt-4 border-t border-gray-200">
-          <h4 className="text-base md:text-lg font-bold text-gray-900">
+        <div className="space-y-4 pt-4 border-t border-gray-700">
+          <h4 className="text-base md:text-lg font-bold text-white">
             Individual Timestamps:
           </h4>
           <div className="space-y-3">
@@ -83,7 +83,7 @@ export function YouTubeTimestampsTab({
                 <code className="text-sm md:text-base font-mono font-bold gradient-emerald text-white px-3 py-1.5 rounded-lg shadow-md shrink-0">
                   {timestamp.timestamp}
                 </code>
-                <p className="text-sm md:text-base text-gray-700 flex-1 min-w-0 wrap-break-word leading-relaxed">
+                <p className="text-sm md:text-base text-gray-300 flex-1 min-w-0 wrap-break-word leading-relaxed">
                   {timestamp.description}
                 </p>
               </div>

@@ -1,16 +1,15 @@
 import { PricingTable } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
-import { ArrowLeft, Lock, Zap, Crown } from "lucide-react";
+import { ArrowLeft, Crown, Lock, Zap } from "lucide-react";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 
 interface UpgradePageProps {
-  searchParams: {
+  searchParams: Promise<{
     reason?: string;
     feature?: string;
-  };
+  }>;
 }
-
 
 function getUpgradeMessage(reason?: string, feature?: string) {
   switch (reason) {
@@ -60,7 +59,7 @@ function getCurrentPlan(authObj: Awaited<ReturnType<typeof auth>>) {
 }
 
 export default async function UpgradePage({ searchParams }: UpgradePageProps) {
-  const { reason, feature } = searchParams;
+  const { reason, feature } = await searchParams;
   const message = getUpgradeMessage(reason, feature);
   const Icon = message.icon;
 
@@ -74,7 +73,7 @@ export default async function UpgradePage({ searchParams }: UpgradePageProps) {
         <div className="container mx-auto px-4 py-6">
           <Link
             href="/dashboard/projects"
-            className="inline-flex items-center text-sm font-medium text-gray-600 hover:text-emerald-600 transition-colors"
+            className="inline-flex items-center text-sm font-medium text-gray-400 hover:text-emerald-600 transition-colors"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Dashboard
@@ -86,24 +85,24 @@ export default async function UpgradePage({ searchParams }: UpgradePageProps) {
       <div className="container mx-auto px-4 py-16">
         {/* Contextual Message */}
         <div className="max-w-3xl mx-auto text-center mb-16">
-          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gray-100 mb-6">
-            <Icon className="h-10 w-10 text-gray-700" />
+          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gray-800 mb-6">
+            <Icon className="h-10 w-10 text-gray-300" />
           </div>
           <h1 className="text-5xl font-extrabold mb-6">
             <span className="gradient-emerald-text">{message.title}</span>
           </h1>
-          <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+          <p className="text-xl text-gray-400 mb-8 leading-relaxed">
             {message.description}
           </p>
 
           {/* Current Plan Badge */}
-          <div className="flex items-center justify-center gap-2 text-base text-gray-600">
+          <div className="flex items-center justify-center gap-2 text-base text-gray-400">
             <span>Current plan:</span>
             <Badge
               className={
                 currentPlan === "ultra"
                   ? "gradient-emerald text-white px-4 py-1.5"
-                  : "bg-gray-200 text-gray-700 px-4 py-1.5"
+                  : "bg-gray-200 text-gray-300 px-4 py-1.5"
               }
             >
               {currentPlan === "ultra" && <Crown className="h-4 w-4 mr-1" />}

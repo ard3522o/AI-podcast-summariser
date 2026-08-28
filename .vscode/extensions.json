@@ -1,5 +1,3 @@
 {
-    "recommendations": [
-        "coderabbit.coderabbit-vscode"
-    ]
+  "recommendations": ["coderabbit.coderabbit-vscode"]
 }

@@ -28,10 +28,10 @@ export function KeyMomentsTab({ keyMoments }: KeyMomentsTabProps) {
               {moment.time}
             </Badge>
             <div className="flex-1 min-w-0">
-              <p className="font-bold text-base md:text-lg text-gray-900 mb-2 wrap-break-word">
+              <p className="font-bold text-base md:text-lg text-white mb-2 wrap-break-word">
                 {moment.text}
               </p>
-              <p className="text-sm md:text-base text-gray-600 leading-relaxed wrap-break-word">
+              <p className="text-sm md:text-base text-gray-400 leading-relaxed wrap-break-word">
                 {moment.description}
               </p>
             </div>

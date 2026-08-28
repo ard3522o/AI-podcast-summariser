@@ -1,4 +1,3 @@
-
 import type { LucideIcon } from "lucide-react";
 import {
   FileSignature,
@@ -11,25 +10,23 @@ import {
 
 export const MAX_FILE_SIZE = 100 * 1024 * 1024; // 100MB limit
 export const ALLOWED_AUDIO_TYPES = {
-        "audio/mpeg": [".mp3"], // MP3
-        "audio/x-m4a": [".m4a"], // M4A (iOS/Apple)
-        "audio/wav": [".wav", ".wave"], // WAV
-        "audio/x-wav": [".wav", ".wave"], // WAV (alternate MIME)
-        "audio/aac": [".aac"], // AAC
-        "audio/ogg": [".ogg", ".oga"], // OGG Vorbis
-        "audio/opus": [".opus"], // Opus
-        "audio/webm": [".webm"], // WebM Audio
-        "audio/flac": [".flac"], // FLAC
-        "audio/x-flac": [".flac"], // FLAC (alternate MIME)
-        "audio/3gpp": [".3gp"], // 3GP
-        "audio/3gpp2": [".3g2"], // 3G2
-        }
-
+  "audio/mpeg": [".mp3"], // MP3
+  "audio/x-m4a": [".m4a"], // M4A (iOS/Apple)
+  "audio/wav": [".wav", ".wave"], // WAV
+  "audio/x-wav": [".wav", ".wave"], // WAV (alternate MIME)
+  "audio/aac": [".aac"], // AAC
+  "audio/ogg": [".ogg", ".oga"], // OGG Vorbis
+  "audio/opus": [".opus"], // Opus
+  "audio/webm": [".webm"], // WebM Audio
+  "audio/flac": [".flac"], // FLAC
+  "audio/x-flac": [".flac"], // FLAC (alternate MIME)
+  "audio/3gpp": [".3gp"], // 3GP
+  "audio/3gpp2": [".3g2"], // 3G2
+};
 
 export const PROGRESS_CAP_PERCENTAGE = 95;
 export const ANIMATION_INTERVAL_MS = 4000;
 export const PROGRESS_UPDATE_INTERVAL_MS = 1000;
-
 
 export const MS_PER_MINUTE = 60000;
 export const MS_PER_HOUR = 3600000;

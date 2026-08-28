@@ -2,7 +2,6 @@ import { v } from "convex/values";
 import type { Doc } from "./_generated/dataModel";
 import { mutation, query } from "./_generated/server";
 
-
 export const createProject = mutation({
   args: {
     userId: v.string(),
@@ -16,7 +15,7 @@ export const createProject = mutation({
   handler: async (ctx, args) => {
     const now = Date.now();
 
-     const projectId = await ctx.db.insert("projects", {
+    const projectId = await ctx.db.insert("projects", {
       userId: args.userId,
       inputUrl: args.inputUrl,
       fileName: args.fileName,
@@ -44,7 +43,7 @@ export const updateProjectStatus = mutation({
       v.literal("uploaded"),
       v.literal("processing"),
       v.literal("completed"),
-      v.literal("failed")
+      v.literal("failed"),
     ),
   },
   handler: async (ctx, args) => {
@@ -61,7 +60,6 @@ export const updateProjectStatus = mutation({
     await ctx.db.patch(args.projectId, updates);
   },
 });
-
 
 export const saveTranscript = mutation({
   args: {
@@ -80,10 +78,10 @@ export const saveTranscript = mutation({
                 word: v.string(),
                 start: v.number(),
                 end: v.number(),
-              })
-            )
+              }),
+            ),
           ),
-        })
+        }),
       ),
       speakers: v.optional(
         v.array(
@@ -93,8 +91,8 @@ export const saveTranscript = mutation({
             end: v.number(),
             text: v.string(),
             confidence: v.number(),
-          })
-        )
+          }),
+        ),
       ),
       chapters: v.optional(
         v.array(
@@ -104,8 +102,8 @@ export const saveTranscript = mutation({
             headline: v.string(),
             summary: v.string(),
             gist: v.string(),
-          })
-        )
+          }),
+        ),
       ),
     }),
   },
@@ -126,16 +124,16 @@ export const updateJobStatus = mutation({
         v.literal("pending"),
         v.literal("running"),
         v.literal("completed"),
-        v.literal("failed")
-      )
+        v.literal("failed"),
+      ),
     ),
     contentGeneration: v.optional(
       v.union(
         v.literal("pending"),
         v.literal("running"),
         v.literal("completed"),
-        v.literal("failed")
-      )
+        v.literal("failed"),
+      ),
     ),
   },
   handler: async (ctx, args) => {
@@ -148,7 +146,9 @@ export const updateJobStatus = mutation({
       jobStatus: {
         ...project.jobStatus,
         ...(args.transcription && { transcription: args.transcription }),
-        ...(args.contentGeneration && { contentGeneration: args.contentGeneration }),
+        ...(args.contentGeneration && {
+          contentGeneration: args.contentGeneration,
+        }),
       },
       updatedAt: Date.now(),
     };
@@ -156,7 +156,6 @@ export const updateJobStatus = mutation({
     await ctx.db.patch(args.projectId, updates);
   },
 });
-
 
 export const saveGeneratedContent = mutation({
   args: {
@@ -168,8 +167,8 @@ export const saveGeneratedContent = mutation({
           timestamp: v.number(),
           text: v.string(),
           description: v.string(),
-        })
-      )
+        }),
+      ),
     ),
     summary: v.optional(
       v.object({
@@ -177,7 +176,7 @@ export const saveGeneratedContent = mutation({
         bullets: v.array(v.string()),
         insights: v.array(v.string()),
         tldr: v.string(),
-      })
+      }),
     ),
     socialPosts: v.optional(
       v.object({
@@ -187,7 +186,7 @@ export const saveGeneratedContent = mutation({
         tiktok: v.string(),
         youtube: v.string(),
         facebook: v.string(),
-      })
+      }),
     ),
     titles: v.optional(
       v.object({
@@ -195,7 +194,7 @@ export const saveGeneratedContent = mutation({
         youtubeLong: v.array(v.string()),
         podcastTitles: v.array(v.string()),
         seoKeywords: v.array(v.string()),
-      })
+      }),
     ),
     hashtags: v.optional(
       v.object({
@@ -204,28 +203,26 @@ export const saveGeneratedContent = mutation({
         tiktok: v.array(v.string()),
         linkedin: v.array(v.string()),
         twitter: v.array(v.string()),
-      })
+      }),
     ),
     youtubeTimestamps: v.optional(
       v.array(
         v.object({
           timestamp: v.string(),
           description: v.string(),
-        })
-      )
+        }),
+      ),
     ),
   },
   handler: async (ctx, args) => {
     const { projectId, ...content } = args;
 
-    
     await ctx.db.patch(projectId, {
       ...content,
       updatedAt: Date.now(),
     });
   },
 });
-
 
 export const recordError = mutation({
   args: {
@@ -236,7 +233,7 @@ export const recordError = mutation({
       v.object({
         statusCode: v.optional(v.number()),
         stack: v.optional(v.string()),
-      })
+      }),
     ),
   },
   handler: async (ctx, args) => {
@@ -253,7 +250,6 @@ export const recordError = mutation({
     });
   },
 });
-
 
 export const saveJobErrors = mutation({
   args: {
@@ -275,7 +271,6 @@ export const saveJobErrors = mutation({
   },
 });
 
-
 export const getProject = query({
   args: {
     projectId: v.id("projects"),
@@ -293,7 +288,7 @@ export const listUserProjects = query({
       v.object({
         numItems: v.number(),
         cursor: v.optional(v.string()),
-      })
+      }),
     ),
   },
   handler: async (ctx, args) => {
@@ -312,7 +307,6 @@ export const listUserProjects = query({
     });
   },
 });
-
 
 export const getUserProjectCount = query({
   args: {
@@ -337,7 +331,6 @@ export const getUserProjectCount = query({
   },
 });
 
-
 export const deleteProject = mutation({
   args: {
     projectId: v.id("projects"),
@@ -356,7 +349,6 @@ export const deleteProject = mutation({
       throw new Error("Unauthorized: You don't own this project");
     }
 
-    
     await ctx.db.patch(args.projectId, {
       deletedAt: Date.now(),
       updatedAt: Date.now(),
@@ -366,7 +358,6 @@ export const deleteProject = mutation({
     return { inputUrl: project.inputUrl };
   },
 });
-
 
 export const updateProjectDisplayName = mutation({
   args: {

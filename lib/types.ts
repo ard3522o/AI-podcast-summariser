@@ -1,4 +1,3 @@
-
 export type PhaseStatus = "pending" | "running" | "completed" | "failed";
 
 export type UploadStatus =

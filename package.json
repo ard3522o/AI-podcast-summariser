@@ -1,9 +1,9 @@
 {
-  "name": "ai-podcast-youtube-saas",
+  "name": "podcasto",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev & convex dev",
+    "dev": "next dev & convex dev & inngest-cli dev",
     "build": "next build",
     "start": "next start",
     "lint": "biome check",

@@ -1,11 +1,10 @@
-import { auth } from "@clerk/nextjs/server";
-import { convex } from "@/lib/convex-client";
+import type { auth } from "@clerk/nextjs/server";
 import { api } from "@/convex/_generated/api";
+import { convex } from "@/lib/convex-client";
 import {
+  type FeatureName,
   PLAN_FEATURES,
   PLAN_LIMITS,
-  type FeatureName,
-  type PlanLimits,
   type PlanName,
 } from "./tier-config";
 
@@ -21,16 +20,21 @@ export async function checkUploadLimits(
   authObj: AuthObject,
   userId: string,
   fileSize: number,
-  duration?: number
+  duration?: number,
 ): Promise<UploadValidationResult> {
   const { has } = authObj;
   let plan: PlanName = "free";
-  if (has?.({ plan: "ultra" })) {
+
+  // Dev override: set FORCE_PLAN=ultra in .env to bypass Clerk plan checks
+  const forcePlan = process.env.FORCE_PLAN as PlanName | undefined;
+  if (forcePlan && ["free", "pro", "ultra"].includes(forcePlan)) {
+    plan = forcePlan;
+  } else if (has?.({ plan: "ultra" })) {
     plan = "ultra";
   } else if (has?.({ plan: "pro" })) {
     plan = "pro";
   }
-  
+
   const limits = PLAN_LIMITS[plan];
 
   if (fileSize > limits.maxFileSize) {
@@ -51,9 +55,7 @@ export async function checkUploadLimits(
     };
   }
 
-  
   if (limits.maxProjects !== null) {
-    
     const includeDeleted = plan === "free";
     const projectCount = await convex.query(api.projects.getUserProjectCount, {
       userId,
@@ -74,10 +76,9 @@ export async function checkUploadLimits(
   return { allowed: true };
 }
 
-
 export function checkFeatureAccess(
   authObj: AuthObject,
-  feature: FeatureName
+  feature: FeatureName,
 ): boolean {
   const { has } = authObj;
   return has ? has({ feature }) : false;

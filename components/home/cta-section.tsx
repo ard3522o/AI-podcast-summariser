@@ -14,9 +14,9 @@ export async function CtaSection() {
       <div className="absolute inset-0 gradient-emerald"></div>
 
       {/* Decorative elements */}
-      <div className="absolute top-10 right-10 w-72 h-72 bg-white rounded-full mix-blend-overlay filter blur-3xl opacity-20 animate-float"></div>
+      <div className="absolute top-10 right-10 w-72 h-72 bg-emerald-400 rounded-full mix-blend-screen filter blur-3xl opacity-20 animate-float"></div>
       <div
-        className="absolute bottom-10 left-10 w-72 h-72 bg-teal-200 rounded-full mix-blend-overlay filter blur-3xl opacity-30 animate-float"
+        className="absolute bottom-10 left-10 w-72 h-72 bg-teal-500 rounded-full mix-blend-screen filter blur-3xl opacity-30 animate-float"
         style={{ animationDelay: "1.5s" }}
       ></div>
 
